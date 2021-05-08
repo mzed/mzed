@@ -23,21 +23,42 @@ public:
     outlet<> outlet_y{ this, "(float) y coordinate" };
     outlet<> outlet_z{ this, "(float) z coordinate" };
 
-    attribute<double> l_h{ this, "timestep", 0.01 };
+    attribute<double> l_h { this, "timestep", 0.01 };
 
-    mzed_lorenz(const atoms& args = {}) 
-    {
-        l_xyz[0] = l_xyz[1] = l_xyz[2] = 0.6;
+    argument<number> x_arg
+    { 
+        this, "x", "Initial x value.",
+        MIN_ARGUMENT_FUNCTION 
+        {
+            currentX = arg;
+        }
+    };
 
-        if (args.size() > 0)
-            l_xyz[0] = args[0];
-        if (args.size() > 1)
-            l_xyz[1] = args[1];
-        if (args.size() > 2)
-            l_xyz[2] = args[2];
-        if (args.size() > 3)
-            l_h = args[3];
-    }
+    argument<number> y_arg
+    { 
+        this, "y", "Initial y value.",
+        MIN_ARGUMENT_FUNCTION 
+        {
+            currentY = arg;
+        }
+    };
+
+    argument<number> z_arg
+    { 
+        this, "z", "Initial z value.",
+        MIN_ARGUMENT_FUNCTION 
+        {
+            currentZ = arg;
+        }
+    };
+
+    argument<number> h_arg
+    { this, "h", "Initial h (timestep) value.",
+        MIN_ARGUMENT_FUNCTION 
+        {
+            l_h = arg;
+        }
+    };
 
     message<> ints
     {
@@ -47,11 +68,11 @@ public:
             switch (inlet)
             {
                 case 0:
-                    l_xyz[0] = args[0];
+                    currentX = args[0];
                 case 1:
-                    l_xyz[0] = args[0];
+                    currentY = args[0];
                 case 2:
-                    l_xyz[2] = args[0];
+                    currentZ = args[0];
                 default:
                     assert(false);
             }
@@ -69,14 +90,14 @@ public:
             double zNew;
 
             // calculate the attractor
-            zNew = l_xyz[2] + (l_h * ((l_xyz[0] * l_xyz[1]) - ((8.0 / 3.0) * l_xyz[2])));
-            yNew = l_xyz[1] + (l_h * ((28.0 * l_xyz[0] - l_xyz[1]) - (l_xyz[0] * l_xyz[2])));
-            xNew = l_xyz[0] + ((l_h * 10.0) * (l_xyz[1] - l_xyz[0]));
+            zNew = currentZ + (l_h * ((currentX * currentY) - ((8.0 / 3.0) * currentZ)));
+            yNew = currentY + (l_h * ((28.0 * currentX - currentY) - (currentX * currentZ)));
+            xNew = currentX + ((l_h * 10.0) * (currentY - currentX));
 
             // save the calculated values
-            l_xyz[0] = xNew;
-            l_xyz[1] = yNew;
-            l_xyz[2] = zNew;
+            currentX = xNew;
+            currentY = yNew;
+            currentZ = zNew;
 
             // output the calculated values
             outlet_z.send(zNew);
@@ -99,7 +120,10 @@ public:
     };
 
 private:
-    double l_xyz[3];
+    double currentX = 0.6;
+    double currentY = 0.6;
+    double currentZ = 0.6;
+
 };
 
 MIN_EXTERNAL(mzed_lorenz);
