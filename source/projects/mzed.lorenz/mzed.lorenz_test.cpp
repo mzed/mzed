@@ -1,22 +1,20 @@
-/// @file
-///	@ingroup 	minexamples
-///	@copyright	Copyright 2018 The Min-DevKit Authors. All rights reserved.
+﻿/// @file
+///	@ingroup 	mzed
+///	@copyright	Copyright 2002-2021 Michael Zbyszyński  All rights reserved.
 ///	@license	Use of this source code is governed by the MIT License found in the License.md file.
 
 #include "c74_min_unittest.h"     // required unit test header
-#include "mzed.hello-world.cpp"    // need the source of our object so that we can access it
-
-// Unit tests are written using the Catch framework as described at
-// https://github.com/philsquared/Catch/blob/master/docs/tutorial.md
+#include "mzed.lorenz.cpp"    // need the source of our object so that we can access it
 
 SCENARIO("object produces correct output") {
-    ext_main(nullptr);    // every unit test must call ext_main() once to configure the class
+    ext_main(nullptr);
 
-    GIVEN("An instance of our object") {
+    GIVEN("An instance of lorenz") {
 
-        test_wrapper<hello_world> an_instance;
-        hello_world&              my_object = an_instance;
+        test_wrapper<mzed_lorenz> an_instance;
+        mzed_lorenz&              my_object = an_instance;
 
+        /*
         // check that default attr values are correct
         REQUIRE((my_object.greeting == symbol("hello world")));
 
@@ -30,5 +28,6 @@ SCENARIO("object produces correct output") {
                 REQUIRE((output[0][0] == symbol("hello world")));
             }
         }
+        */
     }
 }
