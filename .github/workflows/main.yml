@@ -43,7 +43,6 @@ jobs:
     - name: package_macos
       if: matrix.os == 'macos-latest'
       env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_SHA: ${{ github.sha }}
         GITHUB_CONFIG: ${{ matrix.config }}
