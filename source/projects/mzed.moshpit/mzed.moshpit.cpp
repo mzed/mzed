@@ -23,13 +23,64 @@ public:
     mzed_moshpit(const atoms& args = {})
         : ui_operator::ui_operator{ this, args } {}
 
-    attribute<number> numMoshers  //TODO: Threadsafe?
+
+  timer<> clock
+  {
+      this,
+      MIN_FUNCTION
+      {
+          output.send("bang");
+          double interval = double(floor(1000/framerate));
+          clock.delay(interval);
+          
+          return {};
+      }
+  };
+
+
+    //////////////////////////////////////////////////////////////    attributes
+    
+    attribute<bool> on
+    { 
+        this, "on", false,
+        description {"Turn on/off the internal timer."},
+        setter 
+        { 
+            MIN_FUNCTION 
+            {
+                if (args[0] == true) clock.delay(0.0);    // fire the first one straight-away
+                else clock.stop();
+                
+                return args;
+            }
+        }
+    };
+    
+    attribute<int> numMoshers  //TODO: Threadsafe?
     {
         this, "number of moshers", 300,
         range {1, 8192}
     };
 
-    // respond to the bang message to do something
+    attribute<double> noise { this, "number of moshers", 3.0 };
+    attribute<double> flock { this, "flock", 1.0 };
+    attribute<int> lx { this, "mosher size", 31 };
+    attribute<int> frameskip { this, "frames between renders", 2 };
+    attribute<int> framerate { this, "frames per second", 30 };
+    attribute<bool> showforce { this, "showforce", false };
+    attribute<bool> drawing{ this, "draw circles", true };
+
+    //////////////////////////////////////////////////////////////    messages
+    
+    message<> toggle
+    { 
+        this, "int", "Turn on/off the internal timer.",
+          MIN_FUNCTION {
+              on = args[0];
+              return {};
+          }
+    };
+
     message<> bang 
     { 
         this, "bang", "ahoy",
@@ -70,6 +121,9 @@ public:
             return {};
         }
     };
+
+
+    //////////////////////////////////////////////////////////////    functions
 };
 
 MIN_EXTERNAL(mzed_moshpit);
