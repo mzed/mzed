@@ -1,7 +1,7 @@
 ﻿/// @file
 ///	@ingroup 	mzed
 ///	@copyright	Copyright 2002-2021 Michael Zbyszyński  All rights reserved.
-///	@license	Use of this source code is governed by the MIT License found in the License.md file.
+///	@license	Use of this source code is governed by the GPL v3 License found in the License.md file.
 
 #include "c74_min.h"
 
@@ -10,7 +10,7 @@ using namespace c74::min;
 class mzed_lorenz : public object<mzed_lorenz>
 {
 public:
-    MIN_DESCRIPTION{ "Generate a Lorenz attractor" };
+    MIN_DESCRIPTION{ "Generate a Lorenz attractor." };
     MIN_TAGS{ "chaos" };
     MIN_AUTHOR{ "mzed" };
     MIN_RELATED{ "roessler" };
