@@ -144,13 +144,13 @@ public:
 
      //////////////////////////////////////////////////////////////    functions
 
-     void mzed_moshpit::update()
+     void update()
      {
      
 
      }
 
-     void mzed_moshpit::draw_all(target t)
+     void draw_all(target t)
      {
          int ly = lx; // I think this is cool, because we're only using circles
          double sx = t.width() / lx;
@@ -161,7 +161,7 @@ public:
          for (int i = 0; i < numMoshers; ++i) 
          {
              cr = fabs(col[i] / 25);
-             std::clamp(cr, 0.0, 1.0);
+             cr = std::clamp(cr, 0.0, 1.0);
              //if (cr < 0.) cr = 0.0;
              //else if (cr > 1.) cr = 1.0;
 
@@ -216,6 +216,15 @@ public:
                  line_width { 1.0 },
              };
 
+             /*
+             arc<fill> {
+                 t,
+                 color{ 1.0, 1.0, 1.0, 1.0 },
+                 position{ 1.0, 1.0 },
+                 size{ 10, 10 },
+                 span{ 0.0, 6.0 }
+             };
+             */
 
              //if (x->m_drawing == 1) {
                 // jgraphics_fill(g);
