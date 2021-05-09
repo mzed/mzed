@@ -8,7 +8,13 @@
 using namespace c74::min;
 using namespace c74::min::ui;
 
-#define ARRAY_SIZE 1024
+constexpr size_t ARRAY_SIZE = 1024;
+constexpr size_t NMAX = 50;
+constexpr size_t TWO_R = 2;
+constexpr size_t FR = 2;
+constexpr double VHAPPY = 1.0;
+constexpr double DAMP = 1.0;
+constexpr double GDT = 0.1;
 
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
@@ -136,18 +142,218 @@ public:
 
  private:
 
+     double mpX[ARRAY_SIZE];
+     double mpY[ARRAY_SIZE];
+     double vx[ARRAY_SIZE];
+     double vy[ARRAY_SIZE];
+     double fx[ARRAY_SIZE];
+     double fy[ARRAY_SIZE];
      double col[ARRAY_SIZE];
+     double r[ARRAY_SIZE];
      long type[ARRAY_SIZE];
+
+     //neighbor list
+     long m_size[2] = { 0, 0 };
+     long cells[4096]; // Why 4096?
+     long count[ARRAY_SIZE];
+
+     //things we can change
+     long pbc[2] = { 1, 1 };
+     long epsilon = 100;
 
      color greyColor = { 0.5, 0.5, 0.5, 0.8 };
      color redColor = { 1.0, 0.0, 0.0, 0.8 };
 
      //////////////////////////////////////////////////////////////    functions
 
+     long moshpit_mod_rvec(int a, int b, int p, int* image) {
+         *image = 1;
+         if (b == 0) {
+             if (a == 0) {
+                 *image = 0;
+             }
+             return 0;
+         }
+         if (p != 0) {
+             if (a > b) {
+                 return a - b - 1;
+             }
+             if (a < 0) {
+                 return a + b + 1;
+             }
+         }
+         else {
+             if (a > b) {
+                 return b;
+             }
+             if (a < 0) {
+                 return 0;
+             }
+         }
+         *image = 0;
+         return a;
+     }
+
+     inline double normRand() 
+     {
+         return (double)rand() / (double)RAND_MAX;
+     }
+
+     inline double mymod(double a, double b) { //TODO: MZ why?
+         return a - b * floor(a / b) + b * (a < 0);
+     }
+     
      void update()
      {
-     
+         int ly = lx; // I think this is cool, because we're only using circles
+         // double colavg = 0.0;  //Doesn't seem like I need this
+         int image[2] = { 0, 0 };
+         
+         for (size_t i = 0; i < numMoshers; ++i) 
+         {
+             col[i] = 0.0;
+             fx[i] = 0.0;
+             fy[i] = 0.0;
+             double wx = 0.0;
+             double wy = 0.0;
+             long neigh = 0;
 
+             long indX = floor(mpX[i] / lx * m_size[0]);
+             long indY = floor(mpY[i] / ly * m_size[1]);
+
+             for (int ttx = -1; ttx <= 1; ++ttx) 
+             {
+                 for (int tty = -1; tty <= 1; ++tty) 
+                 {
+                     bool goodcell = 1;
+                     long tixx = moshpit_mod_rvec(indX + ttx, m_size[0] - 1, pbc[0], &image[0]);
+                     long tixy = moshpit_mod_rvec(indY + tty, m_size[1] - 1, pbc[1], &image[1]);
+                     if ((pbc[0] < image[0]) || (pbc[1] < image[1])) 
+                     {
+                         goodcell = 0;
+                     }
+
+                     if (goodcell) 
+                     {
+                         long cell = tixx + (tixy * m_size[0]);
+
+                         for (int cc = 0; cc < count[cell]; ++cc) 
+                         {
+                             long j = cells[NMAX * cell + cc];
+                             double dx = mpX[j] - mpX[i];
+                             if (image[0]) {
+                                 dx += lx * ttx;
+                             }
+                             double dy = mpY[j] - mpY[i];
+                             if (image[1]) {
+                                 dy += ly * tty;
+                             }
+                             double l = sqrt(dx * dx + dy * dy);
+                             if (l > 1e-6 && l < TWO_R) 
+                             {
+                                 double r0 = r[i] + r[j];
+                                 double f = (1 - l / r0);
+                                 double c0 = -(epsilon) * f * f * (l < r0);
+                                 fx[i] += c0 * dx;
+                                 fy[i] += c0 * dy;
+                                 double tcol = c0 * c0 * dx * dx + c0 * c0 * dy * dy; //fx[i]*fx[i] + fy[i]*fy[i]
+                                 col[i] += tcol;
+                             }
+
+                             if (type[i] > 0 && type[j] > 0 && l > 1e-6 && l < FR) 
+                             {
+                                 wx += vx[j];
+                                 wy += vy[j];
+                                 neigh++;
+                             }
+                         }
+                     }
+                 }
+             }
+
+             double wlen = (wx * wx + wy * wy);
+
+             if (type[i] > 0 && neigh > 0 && wlen > 1e-6) 
+             {
+                 fx[i] += flock * wx / wlen;
+                 fy[i] += flock * wy / wlen;
+             }
+             double vlen = vx[i] * vx[i] + vy[i] * vy[i];
+             double vhap = 0.;
+             if (type[i] > 0) 
+             {
+                 vhap = VHAPPY;
+             }
+             else 
+             {
+                 vhap = 0.;
+             }
+
+             if (vlen > 1e-6) 
+             {
+                 fx[i] += DAMP * (vhap - vlen) * vx[i] / vlen;
+                 fy[i] += DAMP * (vhap - vlen) * vy[i] / vlen;
+             }
+
+             if (type[i] > 0) 
+             {
+                 fx[i] += noise * (normRand() - 0.5);
+                 fy[i] += noise * (normRand() - 0.5);
+             }
+             //Some keys stuff here, which I ignored
+             //colavg += x->col[i];
+         }
+         for (size_t i = 0; i < numMoshers; ++i) 
+         {
+             vx[i] += fx[i] * GDT;
+             vy[i] += fy[i] * GDT;
+             mpX[i] += vx[i] * GDT;
+             mpY[i] += vy[i] * GDT;
+
+             if (pbc[0] == 0) 
+             {
+                 if (mpX[i] >= lx) 
+                 {
+                     mpX[i] = 2 * lx - mpX[i];
+                     vx[i] *= -1;
+                 }
+                 if (mpX[i] < 0) 
+                 {
+                     mpX[i] = -(mpX[i]);
+                     vx[i] *= -1;
+                 }
+             }
+             else 
+             {
+                 if (mpX[i] >= lx || mpX[i] < 0) 
+                 {
+                     mpX[i] = mymod(mpX[i], lx);
+                 }
+             }
+
+             if (pbc[1] == 0) {
+                 if (mpY[i] >= ly) {
+                     mpY[i] = 2 * ly - mpY[i];
+                     vy[i] *= -1;
+                 }
+                 if (mpY[i] < 0) {
+                     mpY[i] = -(mpY[i]);
+                     vy[i] *= -1;
+                 }
+
+             }
+             else {
+                 if (mpY[i] >= ly || mpY[i] < 0) {
+                     mpY[i] = mymod(mpY[i], ly);
+                 }
+             }
+             /* TODO: Do I need this?
+                 if (dovorticity == true) {
+                     graph_vel(sqrt(x->vx[i]*x->vx[i] + x->vy[i]* x->vy[i]));
+                 }*/
+         }
+
+         //colavg /= numMoshers;
      }
 
      void draw_all(target t)
@@ -213,7 +419,7 @@ public:
                  color{ 0.0, 1.0, 0.0, 1.0 },
                  position { 100, 100 },
                  size { 10, 10 },
-                 line_width { 1.0 },
+                 line_width { 1.0 }
              };
 
              /*
