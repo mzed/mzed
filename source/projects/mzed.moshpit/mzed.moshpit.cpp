@@ -109,18 +109,28 @@ public:
         {
             target t        { args };
             
-            rect<fill> {	// background
+            // background
+            rect<fill> 
+            {	
                 t,
-                color { 0.9, 0.9, 0.9, 1.0 }
+                color { 0.9, 0.9, 0.9, 0.0 },
+                line_width{ 1.0 }
             };
 
+            // frame
+            rect<> 
+            {		
+                t,
+                    color{ {0.3, 0.3, 0.3, 1.0} },
+                    line_width{ 1.0 }
+            };
 
             for (int i = 0; i < frameskip; ++i) 
             {
                 update();
             }
-            draw_all(t);
 
+            draw_all(t);
             return {};
         }
     };
@@ -409,28 +419,14 @@ public:
              */
 
              //jgraphics_se,_line_width(g, 1.);
-             //jgraphics_arc(g, sx * x->mpX[i], sy * x->mpY[i], ss * x->r[i], 0, 2 * M_PI);
+             //jgraphics_arc(g, sx * x->mpX[i], sx * x->mpX[i], ss * x->r[i], 0, 2 * M_PI);
 
-             //arc?
-
-             rect<fill>
-             {
+             ellipse<fill> {
                  t,
-                 color{ 0.0, 1.0, 0.0, 1.0 },
-                 position { 100, 100 },
-                 size { 10, 10 },
-                 line_width { 1.0 }
+                 color{ mosherColor },
+                 position{ sx * mpX[i], sx * mpX[i] },
+                 size{ ss * r[i], ss * r[i] }
              };
-
-             /*
-             arc<fill> {
-                 t,
-                 color{ 1.0, 1.0, 1.0, 1.0 },
-                 position{ 1.0, 1.0 },
-                 size{ 10, 10 },
-                 span{ 0.0, 6.0 }
-             };
-             */
 
              //if (x->m_drawing == 1) {
                 // jgraphics_fill(g);
