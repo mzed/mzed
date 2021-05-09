@@ -8,6 +8,8 @@
 using namespace c74::min;
 using namespace c74::min::ui;
 
+#define ARRAY_SIZE 1024
+
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
@@ -30,6 +32,8 @@ public:
       MIN_FUNCTION
       {
           output.send("bang");
+          redraw();
+
           double interval = double(floor(1000/framerate));
           clock.delay(interval);
           
@@ -104,6 +108,13 @@ public:
                 color { 0.5, 0.5, 0, 1.0 }
             };
 
+
+            for (int i = 0; i < frameskip; ++i) 
+            {
+                update();
+            }
+            draw_all(t);
+
             return {};
         }
     };
@@ -123,7 +134,95 @@ public:
     };
 
 
-    //////////////////////////////////////////////////////////////    functions
+ private:
+
+     double col[ARRAY_SIZE];
+     long type[ARRAY_SIZE];
+
+     color greyColor = { 0.5, 0.5, 0.5, 0.8 };
+     color redColor = { 1.0, 0.0, 0.0, 0.8 };
+
+     //////////////////////////////////////////////////////////////    functions
+
+     void mzed_moshpit::update()
+     {
+     
+
+     }
+
+     void mzed_moshpit::draw_all(target t)
+     {
+         int ly = lx; // I think this is cool, because we're only using circles
+         double sx = t.width() / lx;
+         double sy = t.height() / ly;
+         double ss = sqrt(sx * sy);
+         double cr = 0.;
+
+         for (int i = 0; i < numMoshers; ++i) 
+         {
+             cr = fabs(col[i] / 25);
+             std::clamp(cr, 0.0, 1.0);
+             //if (cr < 0.) cr = 0.0;
+             //else if (cr > 1.) cr = 1.0;
+
+             color mosherColor;
+         
+             if (type[i] == 0) 
+             {
+                 if (showforce == true) mosherColor = { cr, cr, cr, 0.8 };
+                 else mosherColor = greyColor;
+             }
+             else if (type[i] == 2) // yellow
+             {
+                 if (showforce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
+                 else mosherColor = { 1.0, 1.0, 0., 0.8 };
+             }
+             else 
+             {
+                 if (showforce == true) mosherColor = { 1.0, 0.0, 0.0, cr };
+                 else mosherColor = redColor;
+             }
+
+             //TODO: deal with output
+             /*
+             if (x->type[i] == 2) {
+                 t_atom outList[3];
+                 atom_setlong(outList, sx * x->mpX[i]);
+                 atom_setlong(outList + 1, sy * x->mpY[i]);
+                 atom_setlong(outList + 2, cr * 100);
+                 outlet_list(x->m_out, 0L, 3, outList);
+             }
+
+             t_atom outList[5];
+             atom_setlong(outList, i);
+             atom_setlong(outList + 1, x->type[i]);
+             atom_setlong(outList + 2, sx * x->mpX[i]);
+             atom_setlong(outList + 3, sy * x->mpY[i]);
+             atom_setlong(outList + 4, cr * 100);
+             outlet_list(x->m_out2, 0L, 5, outList);
+             */
+
+             //jgraphics_se,_line_width(g, 1.);
+             //jgraphics_arc(g, sx * x->mpX[i], sy * x->mpY[i], ss * x->r[i], 0, 2 * M_PI);
+
+             //arc?
+
+             rect<fill>
+             {
+                 t,
+                 color{ 0.0, 1.0, 0.0, 1.0 },
+                 position { 100, 100 },
+                 size { 10, 10 },
+                 line_width { 1.0 }
+
+             };
+
+
+             //if (x->m_drawing == 1) {
+                // jgraphics_fill(g);
+             //}
+         }
+     }
 };
 
 MIN_EXTERNAL(mzed_moshpit);
