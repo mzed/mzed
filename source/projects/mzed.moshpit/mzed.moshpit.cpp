@@ -55,7 +55,7 @@ public:
         m_size[1] = floor(ly / FR);
 
 
-        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i)
+        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
         {
             cells.push_back(0);
         }
@@ -282,19 +282,9 @@ public:
 
          for (size_t i = 0; i < numMoshers; ++i)
          {
-
              size_t indX = floor(mpX[i] / lx * m_size[0]);
              size_t indY = floor(mpY[i] / ly * m_size[1]);
              size_t tt = indX + indY * m_size[0];
-
-
-                if ((NMAX * tt + count[tt]) > cells.size())
-                {
-                    cout << "oh noes!" << endl;
-                    cout << "tt " << tt << endl;
-                    cout << "thing " << NMAX * tt + count[tt] << endl;
-                }
-
              cells[NMAX * tt + count[tt]] = i;
              count[tt]++;
          }
@@ -467,7 +457,7 @@ public:
      {
          double sx = t.width() / lx;
          double sy = t.height() / ly;
-         double ss = sqrt(sx * sy);
+         double ss = sqrt(sx * sy) * 2.0;
          double cr = 0.;
 
          for (int i = 0; i < numMoshers; ++i) 
