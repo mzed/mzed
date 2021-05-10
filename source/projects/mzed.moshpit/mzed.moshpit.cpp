@@ -483,15 +483,16 @@ public:
                  }
 
                  float shim = ss * r[i] * 0.5;
-                 ellipse<fill> {
-                     t,
-                         color{ mosherColor },
-                         position{ sx * mpX[i] - shim, sy * mpY[i] - shim },
-                         size{ ss * r[i], ss * r[i] }
+                 ellipse<fill> 
+                 {
+                    t,
+                    color{ mosherColor },
+                    position{ sx * mpX[i] - shim, sy * mpY[i] - shim },
+                    size{ ss * r[i], ss * r[i] }
                  };
              }
              
-             out2.send(int(i), type[i], sx * mpX[i], sy * mpY[i], cr * 100);
+             out2.send(int(i), int(type[i]), sx * mpX[i], sy * mpY[i], cr * 100);
              out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
          }
      }
