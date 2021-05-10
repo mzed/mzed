@@ -10,42 +10,108 @@ using namespace c74::min::ui;
 
 constexpr size_t ARRAY_SIZE = 1024;
 constexpr size_t NMAX = 50;
+constexpr double RADIUS = 1.0;
 constexpr size_t TWO_R = 2;
 constexpr size_t FR = 2;
 constexpr double VHAPPY = 1.0;
 constexpr double DAMP = 1.0;
 constexpr double GDT = 0.1;
-
+constexpr double FRAC = 0.15;
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
 public:
-    MIN_DESCRIPTION	{"A two-dimensional model of moshers, similar to a disordered gas."};
-    MIN_TAGS		{"chaos, ui"};
-    MIN_AUTHOR		{"mzed"};
-    MIN_RELATED		{"boids"};
+    MIN_DESCRIPTION{ "A two-dimensional model of moshers, similar to a disordered gas." };
+    MIN_TAGS{ "chaos, ui" };
+    MIN_AUTHOR{ "mzed" };
+    MIN_RELATED{ "boids" };
 
-    inlet<>  input	{ this, "toggle on/off, reset" };
-    outlet<> output	{ this, "position of yellow mosher" };
+    inlet<>  input{ this, "toggle on/off, reset" };
+    outlet<> output{ this, "position of yellow mosher" };
 
     mzed_moshpit(const atoms& args = {})
-        : ui_operator::ui_operator{ this, args } {}
+        : ui_operator::ui_operator{ this, args }
+    {
+        // initialize pit
+        for (size_t i = 0; i < numMoshers; ++i)
+        {
+            r[i] = 0.;
+            mpX[i] = 0.;
+            mpY[i] = 0.;
+            type[i] = 0;
+            vx[i] = 0.;
+            vy[i] = 0.;
+            fx[i] = 0.;
+            fy[i] = 0.;
+            col[i] = 0.;
+        }
+
+        // calculate sidelength
+        lx = floor(1.03 * sqrt(M_PI * RADIUS * RADIUS * numMoshers));
+        ly = lx;
+
+        //neighborlist
+        m_size[0] = floor(lx / FR);
+        m_size[1] = floor(ly / FR);
 
 
-  timer<> clock
-  {
-      this,
-      MIN_FUNCTION
-      {
-          output.send("bang");
-          redraw();
+        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX); ++i)
+        {
+            cells.push_back(0);
+        }
 
-          double interval = double(floor(1000/framerate));
-          clock.delay(interval);
+        for (size_t i = 0; i < (m_size[0] * m_size[1]); ++i)
+        {
+            count[i] = 0;
+        } 
+
+        // init_circle(x);
+        bool uniq = true;
+        for (size_t i = 0; i < numMoshers; ++i)
+        {
+            double tx = lx * normRand();
+            double ty = ly * normRand();
+
+            type[i] = 0;
+            r[i] = RADIUS;
+            mpX[i] = tx;
+            mpY[i] = ty;
+            double dd = sqrt((tx - lx / 2) * (tx - lx / 2) + (ty - ly / 2) * (ty - ly / 2));
+            double rad = sqrt(FRAC * lx * ly / M_PI);
+            bool doCircle = true;
+
+            if (doCircle) 
+            {
+                if (dd < rad) 
+                {
+                    type[i] = (uniq) ? 2 : 1;
+                    uniq = false;
+                }
+            }
+            else 
+            {
+                if (normRand() < FRAC) type[i] = 1;
+            }
+
+            vx[i] = VHAPPY * (normRand() - 0.5);
+            vy[i] = VHAPPY * (normRand() - 0.5);
+        }
+    }
+
+    timer<> clock
+    {
+        this,
+        MIN_FUNCTION
+        {
+            output.send("bang");
+            redraw();
+
+            double interval = double(floor(1000/framerate));
+            clock.delay(interval);
           
-          return {};
-      }
-  };
+            return {};
+        }
+    };
 
 
     //////////////////////////////////////////////////////////////    attributes
@@ -74,7 +140,6 @@ public:
 
     attribute<double> noise { this, "number of moshers", 3.0 };
     attribute<double> flock { this, "flock", 1.0 };
-    attribute<int> lx { this, "mosher size", 31 };
     attribute<int> frameskip { this, "frames between renders", 2 };
     attribute<int> framerate { this, "frames per second", 30 };
     attribute<bool> showforce { this, "showforce", false };
@@ -85,10 +150,11 @@ public:
     message<> toggle
     { 
         this, "int", "Turn on/off the internal timer.",
-          MIN_FUNCTION {
-              on = args[0];
-              return {};
-          }
+        MIN_FUNCTION 
+        {
+            on = args[0];
+            return {};
+        }
     };
 
     message<> bang 
@@ -96,7 +162,7 @@ public:
         this, "bang", "ahoy",
         MIN_FUNCTION 
         {
-            cout << "ahoy" << endl;    // post to the max console
+            cout << "ahoy " << m_size[0] << endl;    // post to the max console
             output.send("ahoy");       // send out our outlet
             return {};
         }
@@ -121,8 +187,8 @@ public:
             rect<> 
             {		
                 t,
-                    color{ {0.3, 0.3, 0.3, 1.0} },
-                    line_width{ 1.0 }
+                color{ {0.3, 0.3, 0.3, 1.0} },
+                line_width{ 1.0 }
             };
 
             for (int i = 0; i < frameskip; ++i) 
@@ -163,8 +229,10 @@ public:
      long type[ARRAY_SIZE];
 
      //neighbor list
+     long lx;
+     long ly;
      long m_size[2] = { 0, 0 };
-     long cells[4096]; // Why 4096?
+     std::vector<long> cells;
      long count[ARRAY_SIZE];
 
      //things we can change
@@ -215,7 +283,6 @@ public:
      
      void update()
      {
-         int ly = lx; // I think this is cool, because we're only using circles
          // double colavg = 0.0;  //Doesn't seem like I need this
          int image[2] = { 0, 0 };
          
@@ -368,7 +435,6 @@ public:
 
      void draw_all(target t)
      {
-         int ly = lx; // I think this is cool, because we're only using circles
          double sx = t.width() / lx;
          double sy = t.height() / ly;
          double ss = sqrt(sx * sy);
@@ -424,7 +490,7 @@ public:
              ellipse<fill> {
                  t,
                  color{ mosherColor },
-                 position{ sx * mpX[i], sx * mpX[i] },
+                 position{ sx * mpX[i], sy * mpY[i] },
                  size{ ss * r[i], ss * r[i] }
              };
 
