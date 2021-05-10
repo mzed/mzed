@@ -491,8 +491,8 @@ public:
                          size{ ss * r[i], ss * r[i] }
                  };
              }
-             //out2.send(i, type[i], sx * mpX[i], sy * mpY[i], cr * 100);
-             //out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
+             out2.send(i, atom(type[i]), sx * mpX[i], sy * mpY[i], cr * 100);
+             out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
          }
      }
 };
