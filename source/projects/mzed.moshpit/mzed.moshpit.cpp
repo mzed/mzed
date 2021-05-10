@@ -458,7 +458,7 @@ public:
          double ss = sqrt(sx * sy) * 2.0;
          double cr = 0.;
 
-         for (int i = 0; i < numMoshers; ++i) 
+         for (size_t i = 0; i < numMoshers; ++i) 
          {
             
              cr = fabs(col[i] / 25);
@@ -491,8 +491,8 @@ public:
                          size{ ss * r[i], ss * r[i] }
                  };
              }
-             out2.send(i, atom(type[i]), sx * mpX[i], sy * mpY[i], cr * 100);
-             out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
+             out2.send(i, atom(type[i]), atom(sx * mpX[i]), atom(sy * mpY[i]), cr * 100);
+             //out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
          }
      }
 };
