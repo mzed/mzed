@@ -55,7 +55,7 @@ public:
         m_size[1] = floor(ly / FR);
 
 
-        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX); ++i)
+        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i)
         {
             cells.push_back(0);
         }
@@ -138,7 +138,7 @@ public:
         range {1, 8192}
     };
 
-    attribute<double> noise { this, "number of moshers", 3.0 };
+    attribute<double> noise { this, "noise", 3.0 };
     attribute<double> flock { this, "flock", 1.0 };
     attribute<int> frameskip { this, "frames between renders", 2 };
     attribute<int> framerate { this, "frames per second", 30 };
@@ -191,6 +191,7 @@ public:
                 line_width{ 1.0 }
             };
 
+            nbl_bin();
             for (int i = 0; i < frameskip; ++i) 
             {
                 update();
@@ -270,6 +271,33 @@ public:
          }
          *image = 0;
          return a;
+     }
+
+     void nbl_bin() 
+     {
+         for (size_t i = 0; i < (m_size[0] * m_size[1]); ++i) 
+         {
+             count[i] = 0;
+         }
+
+         for (size_t i = 0; i < numMoshers; ++i)
+         {
+
+             size_t indX = floor(mpX[i] / lx * m_size[0]);
+             size_t indY = floor(mpY[i] / ly * m_size[1]);
+             size_t tt = indX + indY * m_size[0];
+
+
+                if ((NMAX * tt + count[tt]) > cells.size())
+                {
+                    cout << "oh noes!" << endl;
+                    cout << "tt " << tt << endl;
+                    cout << "thing " << NMAX * tt + count[tt] << endl;
+                }
+
+             cells[NMAX * tt + count[tt]] = i;
+             count[tt]++;
+         }
      }
 
      inline double normRand() 
@@ -355,8 +383,10 @@ public:
                  fx[i] += flock * wx / wlen;
                  fy[i] += flock * wy / wlen;
              }
+
              double vlen = vx[i] * vx[i] + vy[i] * vy[i];
              double vhap = 0.;
+
              if (type[i] > 0) 
              {
                  vhap = VHAPPY;
