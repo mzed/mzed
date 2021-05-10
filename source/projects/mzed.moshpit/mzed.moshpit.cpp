@@ -456,12 +456,11 @@ public:
          double sx = t.width() / lx;
          double sy = t.height() / ly;
          double ss = sqrt(sx * sy) * 2.0;
-         double cr = 0.;
 
          for (size_t i = 0; i < numMoshers; ++i) 
          {
             
-             cr = fabs(col[i] / 25);
+             double cr = fabs(col[i] / 25);
              cr = std::clamp(cr, 0.0, 1.0);
 
              if (drawing) {
@@ -491,8 +490,9 @@ public:
                          size{ ss * r[i], ss * r[i] }
                  };
              }
-             out2.send(i, atom(type[i]), atom(sx * mpX[i]), atom(sy * mpY[i]), cr * 100);
-             //out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
+             
+             out2.send(int(i), type[i], sx * mpX[i], sy * mpY[i], cr * 100);
+             out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
          }
      }
 };
