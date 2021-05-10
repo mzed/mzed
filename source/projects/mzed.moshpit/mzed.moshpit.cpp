@@ -16,7 +16,6 @@ constexpr size_t FR = 2;
 constexpr double VHAPPY = 1.0;
 constexpr double DAMP = 1.0;
 constexpr double GDT = 0.1;
-constexpr double FRAC = 0.15;
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
@@ -78,7 +77,7 @@ public:
             mpX[i] = tx;
             mpY[i] = ty;
             double dd = sqrt((tx - lx / 2) * (tx - lx / 2) + (ty - ly / 2) * (ty - ly / 2));
-            double rad = sqrt(FRAC * lx * ly / M_PI);
+            double rad = sqrt(fractionRed * lx * ly / M_PI);
             bool doCircle = true;
 
             if (doCircle) 
@@ -91,7 +90,7 @@ public:
             }
             else 
             {
-                if (normRand() < FRAC) type[i] = 1;
+                if (normRand() < fractionRed) type[i] = 1;
             }
 
             vx[i] = VHAPPY * (normRand() - 0.5);
@@ -139,6 +138,7 @@ public:
 
     attribute<double> noise { this, "noise", 3.0 };
     attribute<double> flock { this, "flock", 1.0 };
+    attribute<double> fractionRed { this, "fraction red", 0.15 };
     attribute<int> frameskip { this, "frames between renders", 2 };
     attribute<int> framerate { this, "frames per second", 30 };
     attribute<bool> showforce { this, "showforce", false };
