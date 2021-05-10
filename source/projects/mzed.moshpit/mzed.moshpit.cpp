@@ -26,8 +26,9 @@ public:
     MIN_AUTHOR{ "mzed" };
     MIN_RELATED{ "boids" };
 
-    inlet<>  input{ this, "toggle on/off, reset" };
-    outlet<> output{ this, "position of yellow mosher" };
+    inlet<>  input { this, "toggle on/off, reset" };
+    outlet<> out1 { this, "position of yellow mosher" };
+    outlet<> out2 { this, "all of the moshers, by type" };
 
     mzed_moshpit(const atoms& args = {})
         : ui_operator::ui_operator{ this, args }
@@ -47,12 +48,12 @@ public:
         }
 
         // calculate sidelength
-        lx = floor(1.03 * sqrt(M_PI * RADIUS * RADIUS * numMoshers));
+        lx = long(1.03 * sqrt(M_PI * RADIUS * RADIUS * numMoshers));
         ly = lx;
 
         //neighborlist
-        m_size[0] = floor(lx / FR);
-        m_size[1] = floor(ly / FR);
+        m_size[0] = long(lx / FR);
+        m_size[1] = long(ly / FR);
 
 
         for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
@@ -103,9 +104,7 @@ public:
         this,
         MIN_FUNCTION
         {
-            output.send("bang");
             redraw();
-
             double interval = double(floor(1000/framerate));
             clock.delay(interval);
           
@@ -162,8 +161,7 @@ public:
         this, "bang", "ahoy",
         MIN_FUNCTION 
         {
-            cout << "ahoy " << m_size[0] << endl;    // post to the max console
-            output.send("ahoy");       // send out our outlet
+            out1.send("ahoy");       // send out our outlet
             return {};
         }
     };
@@ -196,8 +194,8 @@ public:
             {
                 update();
             }
-
             draw_all(t);
+           
             return {};
         }
     };
@@ -282,8 +280,8 @@ public:
 
          for (size_t i = 0; i < numMoshers; ++i)
          {
-             size_t indX = floor(mpX[i] / lx * m_size[0]);
-             size_t indY = floor(mpY[i] / ly * m_size[1]);
+             size_t indX = size_t(mpX[i] / lx * m_size[0]);
+             size_t indY = size_t(mpY[i] / ly * m_size[1]);
              size_t tt = indX + indY * m_size[0];
              cells[NMAX * tt + count[tt]] = i;
              count[tt]++;
@@ -313,8 +311,8 @@ public:
              double wy = 0.0;
              long neigh = 0;
 
-             long indX = floor(mpX[i] / lx * m_size[0]);
-             long indY = floor(mpY[i] / ly * m_size[1]);
+             long indX = long(mpX[i] / lx * m_size[0]);
+             long indY = long(mpY[i] / ly * m_size[1]);
 
              for (int ttx = -1; ttx <= 1; ++ttx) 
              {
@@ -462,61 +460,39 @@ public:
 
          for (int i = 0; i < numMoshers; ++i) 
          {
+            
              cr = fabs(col[i] / 25);
              cr = std::clamp(cr, 0.0, 1.0);
-             //if (cr < 0.) cr = 0.0;
-             //else if (cr > 1.) cr = 1.0;
 
-             color mosherColor;
-         
-             if (type[i] == 0) 
-             {
-                 if (showforce == true) mosherColor = { cr, cr, cr, 0.8 };
-                 else mosherColor = greyColor;
+             if (drawing) {
+                 color mosherColor;
+
+                 if (type[i] == 0)
+                 {
+                     if (showforce == true) mosherColor = { cr, cr, cr, 0.8 };
+                     else mosherColor = greyColor;
+                 }
+                 else if (type[i] == 2) // yellow
+                 {
+                     if (showforce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
+                     else mosherColor = { 1.0, 1.0, 0., 0.8 };
+                 }
+                 else
+                 {
+                     if (showforce == true) mosherColor = { 1.0, 0.0, 0.0, cr };
+                     else mosherColor = redColor;
+                 }
+
+                 float shim = ss * r[i] * 0.5;
+                 ellipse<fill> {
+                     t,
+                         color{ mosherColor },
+                         position{ sx * mpX[i] - shim, sy * mpY[i] - shim },
+                         size{ ss * r[i], ss * r[i] }
+                 };
              }
-             else if (type[i] == 2) // yellow
-             {
-                 if (showforce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
-                 else mosherColor = { 1.0, 1.0, 0., 0.8 };
-             }
-             else 
-             {
-                 if (showforce == true) mosherColor = { 1.0, 0.0, 0.0, cr };
-                 else mosherColor = redColor;
-             }
-
-             //TODO: deal with output
-             /*
-             if (x->type[i] == 2) {
-                 t_atom outList[3];
-                 atom_setlong(outList, sx * x->mpX[i]);
-                 atom_setlong(outList + 1, sy * x->mpY[i]);
-                 atom_setlong(outList + 2, cr * 100);
-                 outlet_list(x->m_out, 0L, 3, outList);
-             }
-
-             t_atom outList[5];
-             atom_setlong(outList, i);
-             atom_setlong(outList + 1, x->type[i]);
-             atom_setlong(outList + 2, sx * x->mpX[i]);
-             atom_setlong(outList + 3, sy * x->mpY[i]);
-             atom_setlong(outList + 4, cr * 100);
-             outlet_list(x->m_out2, 0L, 5, outList);
-             */
-
-             //jgraphics_se,_line_width(g, 1.);
-             //jgraphics_arc(g, sx * x->mpX[i], sx * x->mpX[i], ss * x->r[i], 0, 2 * M_PI);
-
-             ellipse<fill> {
-                 t,
-                 color{ mosherColor },
-                 position{ sx * mpX[i], sy * mpY[i] },
-                 size{ ss * r[i], ss * r[i] }
-             };
-
-             //if (x->m_drawing == 1) {
-                // jgraphics_fill(g);
-             //}
+             out2.send(i, type[i], sx * mpX[i], sy * mpY[i], cr * 100);
+             out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
          }
      }
 };
