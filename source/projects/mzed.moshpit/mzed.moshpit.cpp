@@ -29,23 +29,18 @@ public:
     outlet<> out1 { this, "position of yellow mosher" };
     outlet<> out2 { this, "all of the moshers, by type" };
 
-    mzed_moshpit(const atoms& args = {})
-        : ui_operator::ui_operator{ this, args }
+    mzed_moshpit(const atoms& args = {}) : 
+        ui_operator::ui_operator{ this, args }, 
+        r{},
+        mpX{},
+        mpY{},
+        type{},
+        vx{},
+        vy{},
+        fx{},
+        fy{},
+        col{}
     {
-        // initialize pit
-        for (size_t i = 0; i < numMoshers; ++i)
-        {
-            r[i] = 0.;
-            mpX[i] = 0.;
-            mpY[i] = 0.;
-            type[i] = 0;
-            vx[i] = 0.;
-            vy[i] = 0.;
-            fx[i] = 0.;
-            fy[i] = 0.;
-            col[i] = 0.;
-        }
-
         // calculate sidelength
         lx = long(1.03 * sqrt(M_PI * RADIUS * RADIUS * numMoshers));
         ly = lx;
@@ -53,7 +48,6 @@ public:
         //neighborlist
         m_size[0] = long(lx / FR);
         m_size[1] = long(ly / FR);
-
 
         for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
         {
@@ -106,7 +100,6 @@ public:
             redraw();
             double interval = double(floor(1000/framerate));
             clock.delay(interval);
-          
             return {};
         }
     };
@@ -173,19 +166,17 @@ public:
         {
             target t        { args };
             
-            // background
-            rect<fill> 
+            rect<fill> background
             {	
                 t,
                 color { 0.9, 0.9, 0.9, 0.0 },
                 line_width{ 1.0 }
             };
 
-            // frame
-            rect<> 
+            rect<> frame
             {		
                 t,
-                color{ {0.3, 0.3, 0.3, 1.0} },
+                color{ 0.3, 0.3, 0.3, 1.0 },
                 line_width{ 1.0 }
             };
 
@@ -200,7 +191,6 @@ public:
         }
     };
 
-    // post to max window == but only when the class is loaded the first time
     message<> maxclass_setup 
     { 
         this, "maxclass_setup",
@@ -214,7 +204,6 @@ public:
         }
     };
 
-
  private:
 
      double mpX[ARRAY_SIZE];
@@ -225,7 +214,7 @@ public:
      double fy[ARRAY_SIZE];
      double col[ARRAY_SIZE];
      double r[ARRAY_SIZE];
-     long type[ARRAY_SIZE];
+     size_t type[ARRAY_SIZE];
 
      //neighbor list
      long lx;
@@ -321,11 +310,8 @@ public:
                      bool goodcell = 1;
                      long tixx = moshpit_mod_rvec(indX + ttx, m_size[0] - 1, pbc[0], &image[0]);
                      long tixy = moshpit_mod_rvec(indY + tty, m_size[1] - 1, pbc[1], &image[1]);
-                     if ((pbc[0] < image[0]) || (pbc[1] < image[1])) 
-                     {
-                         goodcell = 0;
-                     }
-
+                     
+                     if ((pbc[0] < image[0]) || (pbc[1] < image[1])) goodcell = 0;
                      if (goodcell) 
                      {
                          long cell = tixx + (tixy * m_size[0]);
@@ -334,13 +320,9 @@ public:
                          {
                              long j = cells[NMAX * cell + cc];
                              double dx = mpX[j] - mpX[i];
-                             if (image[0]) {
-                                 dx += lx * ttx;
-                             }
+                             if (image[0]) dx += lx * ttx;
                              double dy = mpY[j] - mpY[i];
-                             if (image[1]) {
-                                 dy += ly * tty;
-                             }
+                             if (image[1]) dy += ly * tty;
                              double l = sqrt(dx * dx + dy * dy);
                              if (l > 1e-6 && l < TWO_R) 
                              {
@@ -420,10 +402,7 @@ public:
              }
              else 
              {
-                 if (mpX[i] >= lx || mpX[i] < 0) 
-                 {
-                     mpX[i] = mymod(mpX[i], lx);
-                 }
+                 if (mpX[i] >= lx || mpX[i] < 0) mpX[i] = mymod(mpX[i], lx);
              }
 
              if (pbc[1] == 0) {
@@ -437,15 +416,15 @@ public:
                  }
 
              }
-             else {
-                 if (mpY[i] >= ly || mpY[i] < 0) {
-                     mpY[i] = mymod(mpY[i], ly);
-                 }
+             else 
+             {
+                 if (mpY[i] >= ly || mpY[i] < 0) mpY[i] = mymod(mpY[i], ly);
              }
-             /* TODO: Do I need this?
+             /* 
+             TODO: Do I need this?
                  if (dovorticity == true) {
                      graph_vel(sqrt(x->vx[i]*x->vx[i] + x->vy[i]* x->vy[i]));
-                 }*/
+               }*/
          }
 
          //colavg /= numMoshers;
@@ -459,11 +438,11 @@ public:
 
          for (size_t i = 0; i < numMoshers; ++i) 
          {
-            
              double cr = fabs(col[i] / 25);
              cr = std::clamp(cr, 0.0, 1.0);
 
-             if (drawing) {
+             if (drawing) 
+             {
                  color mosherColor;
 
                  if (type[i] == 0)
@@ -482,8 +461,8 @@ public:
                      else mosherColor = redColor;
                  }
 
-                 float shim = ss * r[i] * 0.5;
-                 ellipse<fill> 
+                 double shim = ss * r[i] * 0.5;
+                 ellipse<fill> mosher
                  {
                     t,
                     color{ mosherColor },
