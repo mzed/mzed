@@ -74,7 +74,7 @@ public:
             double rad = sqrt(fractionRed * lx * ly / M_PI);
             bool doCircle = true;
 
-            if (doCircle) 
+            if (doCircle) // Expose this as an attribute?
             {
                 if (dd < rad) 
                 {
@@ -232,29 +232,23 @@ public:
 
      //////////////////////////////////////////////////////////////    functions
 
-     long moshpit_mod_rvec(int a, int b, int p, int* image) {
+     long moshpit_mod_rvec(int a, int b, int p, int* image) 
+     {
          *image = 1;
-         if (b == 0) {
-             if (a == 0) {
-                 *image = 0;
-             }
+         if (b == 0) 
+         {
+             if (a == 0) *image = 0;
              return 0;
          }
-         if (p != 0) {
-             if (a > b) {
-                 return a - b - 1;
-             }
-             if (a < 0) {
-                 return a + b + 1;
-             }
+         if (p != 0) 
+         {
+             if (a > b) return a - b - 1;
+             if (a < 0) return a + b + 1;
          }
-         else {
-             if (a > b) {
-                 return b;
-             }
-             if (a < 0) {
-                 return 0;
-             }
+         else 
+         {
+             if (a > b) return b;
+             if (a < 0) return 0;
          }
          *image = 0;
          return a;
