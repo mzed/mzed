@@ -13,7 +13,7 @@ class mzed_roessler : public object<mzed_roessler>
 public:
     MIN_DESCRIPTION	{"Generate a roessler atttractor"};
     MIN_TAGS		{"chaos"};
-    MIN_AUTHOR		{"Cycling '74"};
+    MIN_AUTHOR		{"mzed"};
     MIN_RELATED		{"lorenz"};
 
     inlet<>  input	{ this, "(bang) calculate next point on attractor" };
