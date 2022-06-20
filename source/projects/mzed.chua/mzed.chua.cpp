@@ -20,12 +20,12 @@ public:
     outlet<> outlet_y{ this, "(float) y coordinate" };
     outlet<> outlet_z{ this, "(float) z coordinate" };
 
-    attribute<double> c_a{ this, "a", 15.6 };
+    attribute<double> c_a{ this, "a", 14.5 };
     attribute<double> c_b{ this, "b", 1.0 };
     attribute<double> c_c{ this, "c", 25.58 };
-    attribute<double> c_d{ this, "d", -1.0 };
-    attribute<double> c_e{ this, "e", 0.0 };
-    attribute<double> c_h{ this, "timestep (h)", 0.05 };
+    attribute<double> c_d{ this, "d", -1.0 }; // -8/7 -1.14285714286
+    attribute<double> c_e{ this, "e", 0.0 }; // -5/7 -0.714285714286
+    attribute<double> c_h{ this, "timestep (h)", 0.01 };
 
     argument<number> a_arg
     { 
@@ -90,10 +90,10 @@ public:
             double zNew;
 
             // calculate the attractor
-            zNew = currentZ + (c_h * (-1 * c_c * currentY));
-            yNew = currentY + (c_h * (c_b * (currentX - currentY + currentZ)));
+            zNew = currentZ + (c_h * -c_c * currentY);
+            yNew = currentY + (c_h * c_b * (currentX - currentY + currentZ));
             float g = (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1));
-            xNew = currentX + (c_h * (currentY - currentX - g));
+            xNew = currentX + (c_h * c_a * (currentY - currentX - g));
            
             // save the calculated values
             currentX = xNew;
@@ -121,10 +121,9 @@ public:
     };
 
 private:
-    double currentX = 0.01;
-    double currentY = 0.01;
-    double currentZ = 0.01;
-
+    double currentX = 1.0;
+    double currentY = 1.0;
+    double currentZ = 1.0;
 };
 
 MIN_EXTERNAL(mzed_chua);
