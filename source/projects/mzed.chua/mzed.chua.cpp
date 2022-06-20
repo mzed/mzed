@@ -24,7 +24,7 @@ public:
     attribute<double> c_b{ this, "b", 1.0 };
     attribute<double> c_c{ this, "c", 25.58 };
     attribute<double> c_d{ this, "d", -1.0 };
-    attribute<double> c_c{ this, "e", 0.0 };
+    attribute<double> c_e{ this, "e", 0.0 };
     attribute<double> c_h{ this, "timestep (h)", 0.05 };
 
     argument<number> a_arg
