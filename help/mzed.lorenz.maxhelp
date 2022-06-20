@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 102.0, 104.0, 748.0, 565.0 ],
+		"rect" : [ 100.0, 100.0, 748.0, 565.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 559.0, 260.0, 1110.0, 531.0 ],
+						"rect" : [ 310.0, 260.0, 1110.0, 531.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1618,7 +1618,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 5.0, 5.0, 280.0, 34.0 ],
-					"text" : "lorenz",
+					"text" : "mzed.lorenz",
 					"textcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ]
 				}
 
