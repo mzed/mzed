@@ -7,7 +7,6 @@
 
 using namespace c74::min;
 
-
 class mzed_roessler : public object<mzed_roessler> 
 {
 public:
