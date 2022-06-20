@@ -1675,7 +1675,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 5.0, 7.0, 292.0, 34.0 ],
-					"text" : "rössler",
+					"text" : "mzed.rössler",
 					"textcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ]
 				}
 

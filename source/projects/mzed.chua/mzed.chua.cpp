@@ -91,7 +91,7 @@ public:
 
             // calculate the attractor
             zNew = currentZ + (c_h * (-1 * c_c * currentY));
-            yNew = currentY + (c_h * (c_b * (currentX - currentY + currentZ));
+            yNew = currentY + (c_h * (c_b * (currentX - currentY + currentZ)));
             float g = (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1));
             xNew = currentX + (c_h * (currentY - currentX - g));
            
@@ -121,9 +121,9 @@ public:
     };
 
 private:
-    double currentX = 0.1;
-    double currentY = 0.1;
-    double currentZ = 0.1;
+    double currentX = 0.01;
+    double currentY = 0.01;
+    double currentZ = 0.01;
 
 };
 

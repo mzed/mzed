@@ -40,6 +40,19 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 14.0,
+					"id" : "obj-38",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 40.0, 162.0, 290.0, 23.0 ],
+					"text" : "g(x) = e * x + (d + e) * (abs(x + 1) - abs(x - 1))"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-64",
 					"maxclass" : "newobj",
 					"numinlets" : 3,
@@ -921,8 +934,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 246.0, 284.0, 41.0, 19.0 ],
-					"text" : "delay 1"
+					"patching_rect" : [ 246.0, 284.0, 43.0, 19.0 ],
+					"text" : "delay 10"
 				}
 
 			}
@@ -937,19 +950,6 @@
 					"outlettype" : [ "bang" ],
 					"patching_rect" : [ 61.0, 246.0, 46.0, 19.0 ],
 					"text" : "loadbang"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 9.0,
-					"id" : "obj-4",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 227.0, 161.0, 17.0 ],
-					"text" : "default values: 0.2 0.2 5.7 0.05"
 				}
 
 			}
@@ -1017,7 +1017,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 331.0, 201.0, 533.0, 277.0 ],
+						"rect" : [ 811.0, 185.0, 533.0, 277.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1190,8 +1190,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 199.0, 56.0, 29.0, 19.0 ],
-									"text" : "* 2."
+									"patching_rect" : [ 199.0, 56.0, 29.5, 19.0 ],
+									"text" : "* 1."
 								}
 
 							}
@@ -1259,8 +1259,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 88.0, 56.0, 29.0, 19.0 ],
-									"text" : "* 5."
+									"patching_rect" : [ 88.0, 56.0, 29.5, 19.0 ],
+									"text" : "* 1."
 								}
 
 							}
@@ -1328,8 +1328,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "float" ],
-									"patching_rect" : [ 12.0, 56.0, 29.0, 19.0 ],
-									"text" : "* 5."
+									"patching_rect" : [ 12.0, 56.0, 29.5, 19.0 ],
+									"text" : "* 1."
 								}
 
 							}
@@ -1661,7 +1661,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 5.0, 43.0, 188.0, 20.0 ],
-					"text" : "generate a rössler atttractor"
+					"text" : "generate a chua atttractor"
 				}
 
 			}
@@ -1690,7 +1690,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 12.0, 61.0, 262.0, 34.0 ],
-					"text" : "rössler calculates succesive points of Rössler Attractor using the following formulae:"
+					"text" : "mzed.chua calculates succesive points of a Chua Attractor using the following formulae:"
 				}
 
 			}
@@ -1740,7 +1740,7 @@
 					"fontsize" : 12.0,
 					"id" : "obj-16",
 					"maxclass" : "newobj",
-					"numinlets" : 4,
+					"numinlets" : 1,
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "" ],
 					"patching_rect" : [ 61.0, 336.0, 67.0, 22.0 ],
@@ -1960,8 +1960,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 93.0, 216.0, 23.0 ],
-					"text" : "xnew = x+h*(-y-z)"
+					"patching_rect" : [ 40.0, 96.0, 216.0, 23.0 ],
+					"text" : "xNew = x + (h * (y - x - g(x))"
 				}
 
 			}
@@ -1974,7 +1974,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0, 160.0, 323.0, 34.0 ],
+					"patching_rect" : [ 16.0, 190.0, 323.0, 34.0 ],
 					"text" : "where x, y and z are coordinates in three-dimensional space and h is the timestep (the resolution of the graph)."
 				}
 
@@ -1988,7 +1988,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 12.0, 537.0, 491.0, 20.0 ],
-					"text" : "* © Michael F. Zbyszynski -- mzed@mikezed.com -- 3 November 2006 *",
+					"text" : "* © Michael F. Zbyszynski -- mzed@mikezed.com -- 20 June 2022 *",
 					"textcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ]
 				}
 
@@ -2001,8 +2001,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 114.0, 166.0, 23.0 ],
-					"text" : "ynew = y+h*(x+a*y)"
+					"patching_rect" : [ 40.0, 117.0, 201.0, 23.0 ],
+					"text" : "yNew = y + (h * (b * (x -  y + z))"
 				}
 
 			}
@@ -2014,21 +2014,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 135.0, 224.0, 23.0 ],
-					"text" : "znew = z+h*(b+z*(x-c))"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 9.0,
-					"id" : "obj-36",
-					"maxclass" : "comment",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 43.0, 214.0, 161.0, 17.0 ],
-					"text" : "optional arguments: a, b, c, and h"
+					"patching_rect" : [ 40.0, 138.0, 224.0, 23.0 ],
+					"text" : "zNew = z + (h * (-c * y))"
 				}
 
 			}
@@ -2040,7 +2027,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 16.0, 194.0, 300.0, 20.0 ],
+					"patching_rect" : [ 16.0, 224.0, 300.0, 20.0 ],
 					"text" : "bang in the left inlet triggers next point on the graph."
 				}
 

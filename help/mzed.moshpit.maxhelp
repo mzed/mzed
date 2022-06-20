@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 438.0, 107.0, 688.0, 586.0 ],
+		"rect" : [ 100.0, 100.0, 688.0, 586.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -57,7 +57,7 @@
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 438.0, 133.0, 688.0, 560.0 ],
+						"rect" : [ 100.0, 126.0, 688.0, 560.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -929,7 +929,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
-									"text" : "MoshPit"
+									"text" : "mzed.MoshPit"
 								}
 
 							}
@@ -1302,7 +1302,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
-									"text" : "MoshPit"
+									"text" : "mzed.MoshPit"
 								}
 
 							}
@@ -1524,7 +1524,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
-									"text" : "MoshPit"
+									"text" : "mzed.MoshPit"
 								}
 
 							}
