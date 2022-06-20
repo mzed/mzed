@@ -76,7 +76,7 @@ public:
     { this, "h", "Initial h (timestep) value.",
         MIN_ARGUMENT_FUNCTION 
         {
-            r_h = arg;
+            c_h = arg;
         }
     };
 
@@ -90,10 +90,10 @@ public:
             double zNew;
 
             // calculate the attractor
-            zNew = currentZ + (l_h * (-1 * c_c * currentY));
-            yNew = currentY + (l_h * (c_b * (currentX - currentY + currentZ));
+            zNew = currentZ + (c_h * (-1 * c_c * currentY));
+            yNew = currentY + (c_h * (c_b * (currentX - currentY + currentZ));
             float g = (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1));
-            xNew = currentX + (l_h * (currentY - currentX - g));
+            xNew = currentX + (c_h * (currentY - currentX - g));
            
             // save the calculated values
             currentX = xNew;
