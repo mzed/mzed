@@ -228,7 +228,7 @@ public:
      long epsilon = 100;
 
      color greyColor = { 0.5, 0.5, 0.5, 0.8 };
-     color redColor = { 1.0, 0.0, 0.0, 0.8 };
+     color redColor = { 1.0, 0.3, 0.0, 0.8 }; //really orange
 
      //////////////////////////////////////////////////////////////    functions
 

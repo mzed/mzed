@@ -14,9 +14,9 @@ public:
     MIN_DESCRIPTION	{"Generate a roessler atttractor"};
     MIN_TAGS		{"chaos"};
     MIN_AUTHOR		{"mzed"};
-    MIN_RELATED		{"lorenz"};
+    MIN_RELATED		{"lorenz, chua"};
 
-    inlet<>  input	{ this, "(bang) calculate next point on attractor" };
+    inlet<>  input	 { this, "(bang) calculate next point on attractor" };
     outlet<> outlet_x{ this, "(float) x coordinate" };
     outlet<> outlet_y{ this, "(float) y coordinate" };
     outlet<> outlet_z{ this, "(float) z coordinate" };
@@ -61,8 +61,6 @@ public:
         }
     };
 
-
-    // respond to the bang message to do something
     message<> bang 
     { 
         this, "bang", "Calculate next point",
@@ -96,7 +94,7 @@ public:
         this, "maxclass_setup",
         MIN_FUNCTION 
         {
-            cout << "roessler object by Michael F. Zbyszyński, v3.0 ©2002-2021" << endl;
+            cout << "roessler object by Michael F. Zbyszynski, v3.0 ©2002-2021" << endl;
             return {};
         }
     };

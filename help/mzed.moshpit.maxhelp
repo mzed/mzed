@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 2,
-			"revision" : 0,
+			"minor" : 3,
+			"revision" : 2,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 190.0, 82.0, 688.0, 586.0 ],
+		"rect" : [ 438.0, 107.0, 688.0, 586.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -50,14 +50,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 2,
-							"revision" : 0,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 688.0, 560.0 ],
+						"rect" : [ 438.0, 133.0, 688.0, 560.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -105,6 +105,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 75.0, 131.0, 150.0, 22.0 ]
 								}
 
@@ -156,8 +157,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 2,
-											"revision" : 0,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -523,8 +524,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 2,
-											"revision" : 0,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -908,11 +909,10 @@
 , 							{
 								"box" : 								{
 									"angle" : 270.0,
-									"grad1" : [ 0.960784, 0.827451, 0.156863, 0.32 ],
-									"grad2" : [ 0.960784, 0.827451, 0.156863, 0.28 ],
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 0.392156862745098 ],
 									"id" : "obj-24",
 									"maxclass" : "panel",
-									"mode" : 1,
+									"mode" : 0,
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
@@ -1033,14 +1033,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 2,
-							"revision" : 0,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 190.0, 108.0, 688.0, 560.0 ],
+						"rect" : [ 0.0, 26.0, 688.0, 560.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1070,21 +1070,6 @@
 						"showontab" : 1,
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"grad1" : [ 0.960784, 0.827451, 0.156863, 0.32 ],
-									"grad2" : [ 0.960784, 0.827451, 0.156863, 0.28 ],
-									"id" : "obj-24",
-									"maxclass" : "panel",
-									"mode" : 1,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 353.0, 474.5, 321.0, 74.0 ],
-									"proportion" : 0.39
-								}
-
-							}
-, 							{
 								"box" : 								{
 									"id" : "obj-23",
 									"linecount" : 5,
@@ -1117,21 +1102,6 @@
 									"on" : 1,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 51.0, 194.0, 286.0, 286.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"grad1" : [ 0.960784, 0.827451, 0.156863, 0.32 ],
-									"grad2" : [ 0.960784, 0.827451, 0.156863, 0.28 ],
-									"id" : "obj-17",
-									"maxclass" : "panel",
-									"mode" : 1,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
-									"proportion" : 0.39
 								}
 
 							}
@@ -1241,6 +1211,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 289.0, 133.0, 150.0, 22.0 ]
 								}
 
@@ -1253,6 +1224,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 289.0, 103.0, 150.0, 22.0 ]
 								}
 
@@ -1265,6 +1237,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 455.0, 182.0, 150.0, 22.0 ]
 								}
 
@@ -1277,6 +1250,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 455.0, 147.0, 150.0, 22.0 ]
 								}
 
@@ -1289,6 +1263,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 455.0, 110.0, 150.0, 22.0 ]
 								}
 
@@ -1301,6 +1276,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 455.0, 62.0, 150.0, 22.0 ]
 								}
 
@@ -1338,7 +1314,38 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 455.0, 216.0, 150.0, 22.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ],
+									"id" : "obj-17",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
+									"proportion" : 0.39
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 353.0, 474.5, 321.0, 74.0 ],
+									"proportion" : 0.39
 								}
 
 							}
@@ -1460,8 +1467,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 2,
-							"revision" : 0,
+							"minor" : 3,
+							"revision" : 2,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1505,21 +1512,6 @@
 									"numoutlets" : 0,
 									"patching_rect" : [ 17.0, 50.0, 296.0, 34.0 ],
 									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"grad1" : [ 0.960784, 0.827451, 0.156863, 0.32 ],
-									"grad2" : [ 0.960784, 0.827451, 0.156863, 0.28 ],
-									"id" : "obj-24",
-									"maxclass" : "panel",
-									"mode" : 1,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
-									"proportion" : 0.39
 								}
 
 							}
@@ -1595,8 +1587,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 2,
-											"revision" : 0,
+											"minor" : 3,
+											"revision" : 2,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1991,6 +1983,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 87.0, 157.0, 150.0, 22.0 ]
 								}
 
@@ -2003,6 +1996,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 87.0, 133.0, 150.0, 22.0 ]
 								}
 
@@ -2015,6 +2009,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 239.0, 157.0, 150.0, 22.0 ]
 								}
 
@@ -2027,6 +2022,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
+									"parameter_enable" : 0,
 									"patching_rect" : [ 239.0, 134.0, 150.0, 22.0 ]
 								}
 
@@ -2040,6 +2036,21 @@
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 38.0, 131.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
+									"proportion" : 0.39
 								}
 
 							}
@@ -2233,7 +2244,15 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "rgrano.maxpat",
+				"name" : "moshpit.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "mzed.moshpit.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "rchoose.maxpat",
 				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
 				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
 				"type" : "JSON",
@@ -2247,7 +2266,7 @@
 				"implicit" : 1
 			}
 , 			{
-				"name" : "rchoose.maxpat",
+				"name" : "rgrano.maxpat",
 				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
 				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
 				"type" : "JSON",
@@ -2259,14 +2278,6 @@
 				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
 				"type" : "JSON",
 				"implicit" : 1
-			}
-, 			{
-				"name" : "moshpit.mxe64",
-				"type" : "mx64"
-			}
-, 			{
-				"name" : "mzed.moshpit.mxe64",
-				"type" : "mx64"
 			}
  ],
 		"autosave" : 0,
