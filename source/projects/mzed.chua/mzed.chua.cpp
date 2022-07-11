@@ -85,15 +85,11 @@ public:
         this, "bang", "Calculate the next point.",
         MIN_FUNCTION
         {
-            double xNew;
-            double yNew;
-            double zNew;
-
             // calculate the attractor
-            zNew = currentZ + (c_h * -c_c * currentY);
-            yNew = currentY + (c_h * c_b * (currentX - currentY + currentZ));
+            double zNew = currentZ + (c_h * -c_c * currentY);
+            double yNew = currentY + (c_h * c_b * (currentX - currentY + currentZ));
             float g = (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1));
-            xNew = currentX + (c_h * c_a * (currentY - currentX - g));
+            double xNew = currentX + (c_h * c_a * (currentY - currentX - g));
            
             // save the calculated values
             currentX = xNew;
