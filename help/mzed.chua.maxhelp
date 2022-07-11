@@ -46,7 +46,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 40.0, 162.0, 290.0, 23.0 ],
+					"patching_rect" : [ 40.0, 161.0, 290.0, 23.0 ],
 					"text" : "g(x) = e * x + (d + e) * (abs(x + 1) - abs(x - 1))"
 				}
 
@@ -1960,7 +1960,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 40.0, 96.0, 216.0, 23.0 ],
+					"patching_rect" : [ 40.0, 94.0, 216.0, 23.0 ],
 					"text" : "xNew = x + (h * a * (y - x - g(x))"
 				}
 
@@ -2014,7 +2014,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 40.0, 138.0, 224.0, 23.0 ],
+					"patching_rect" : [ 40.0, 139.0, 224.0, 23.0 ],
 					"text" : "zNew = z + (h * (-c * y))"
 				}
 
