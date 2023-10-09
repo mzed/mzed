@@ -1,4 +1,4 @@
-﻿/// @file
+/// @file
 ///	@ingroup 	mzed
 ///	@copyright	Copyright 2016-2021 Michael Zbyszyński  All rights reserved.
 ///	@license	Use of this source code is governed by the GPL v3 License found in the License.md file.e.
@@ -49,27 +49,27 @@ public:
         m_size[0] = long(lx / FR);
         m_size[1] = long(ly / FR);
 
-        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
+        for (size_t i {}; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
         {
             cells.push_back(0);
         }
 
-        for (size_t i = 0; i < (m_size[0] * m_size[1]); ++i)
+        for (size_t i {}; i < (m_size[0] * m_size[1]); ++i)
         {
             count[i] = 0;
         } 
 
         // init_circle(x);
-        bool uniq = true;
-        for (size_t i = 0; i < numMoshers; ++i)
+        bool uniq { true } ;
+        for (size_t mosher {}; mosher < numMoshers; ++mosher)
         {
-            double tx = lx * normRand();
-            double ty = ly * normRand();
+          double tx { lx * normRand() };
+          double ty { ly * normRand() };
 
-            type[i] = 0;
-            r[i] = RADIUS;
-            mpX[i] = tx;
-            mpY[i] = ty;
+            type[mosher] = 0;
+            r[mosher] = RADIUS;
+            mpX[mosher] = tx;
+            mpY[mosher] = ty;
             double dd = sqrt((tx - lx / 2) * (tx - lx / 2) + (ty - ly / 2) * (ty - ly / 2));
             double rad = sqrt(fractionRed * lx * ly / M_PI);
             bool doCircle = true;
@@ -78,17 +78,17 @@ public:
             {
                 if (dd < rad) 
                 {
-                    type[i] = (uniq) ? 2 : 1;
+                    type[mosher] = (uniq) ? 2 : 1;
                     uniq = false;
                 }
             }
             else 
             {
-                if (normRand() < fractionRed) type[i] = 1;
+                if (normRand() < fractionRed) type[mosher] = 1;
             }
 
-            vx[i] = VHAPPY * (normRand() - 0.5);
-            vy[i] = VHAPPY * (normRand() - 0.5);
+            vx[mosher] = VHAPPY * (normRand() - 0.5);
+            vy[mosher] = VHAPPY * (normRand() - 0.5);
         }
     }
 
@@ -98,7 +98,7 @@ public:
         MIN_FUNCTION
         {
             redraw();
-            double interval = double(floor(1000/framerate));
+          double interval { double(floor(1000/framerate)) };
             clock.delay(interval);
             return {};
         }
@@ -220,7 +220,7 @@ public:
      long lx;
      long ly;
      long m_size[2] = { 0, 0 };
-     std::vector<long> cells;
+     std::vector<long> cells = { 0, (m_size[0] * m_size[1] * NMAX * 10)};
      long count[ARRAY_SIZE];
 
      //things we can change
