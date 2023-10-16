@@ -99,7 +99,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "drawing",
+									"attr" : "draw circles",
 									"id" : "obj-2",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -939,6 +939,7 @@
 									"maxclass" : "mzed.moshpit",
 									"numinlets" : 1,
 									"numoutlets" : 2,
+									"on" : 1,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 38.0, 214.0, 151.0, 159.0 ]
 								}
@@ -1203,7 +1204,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frameskip",
+									"attr" : "frames between renders",
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -1216,7 +1217,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "framerate",
+									"attr" : "frames per second",
 									"id" : "obj-9",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -1224,19 +1225,6 @@
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 289.0, 103.0, 150.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "boxsize",
-									"id" : "obj-2",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 182.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -1268,14 +1256,14 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "numMoshers",
+									"attr" : "number of moshers",
 									"id" : "obj-4",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 62.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 79.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -1313,7 +1301,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 216.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 180.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -1387,13 +1375,6 @@
 								"patchline" : 								{
 									"destination" : [ "obj-5", 0 ],
 									"source" : [ "obj-19", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-5", 0 ],
-									"source" : [ "obj-2", 0 ]
 								}
 
 							}
@@ -1974,7 +1955,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frameskip",
+									"attr" : "frames between renders",
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -1987,7 +1968,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "framerate",
+									"attr" : "frames per second",
 									"id" : "obj-9",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
