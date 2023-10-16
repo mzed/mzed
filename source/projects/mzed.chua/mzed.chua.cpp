@@ -111,7 +111,7 @@ public:
     this, "maxclass_setup",
     MIN_FUNCTION
     {
-      cout << "mzed.chua object by Michael F. Zbyszynski, v1.0 (c)2022" << endl;
+      cout << "mzed.chua object by Michael F. Zbyszyński, v1.0 (c)2022-2023" << endl;
       return {};
     }
   };

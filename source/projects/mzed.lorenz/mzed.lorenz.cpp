@@ -111,7 +111,7 @@ public:
     this, "maxclass_setup",
     MIN_FUNCTION
     {
-      cout << "lorenz object by Michael F. Zbyszyński, v3.0 ©2002-2023" << endl;
+      cout << "mzed.lorenz object by Michael F. Zbyszyński, v3.0 ©2002-2023" << endl;
       return {};
     }
   };
