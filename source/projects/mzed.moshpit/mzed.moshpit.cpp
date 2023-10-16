@@ -21,25 +21,15 @@ class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
 public:
   MIN_DESCRIPTION{ "A two-dimensional model of moshers, similar to a disordered gas." };
-  MIN_TAGS{ "chaos, ui" };
-  MIN_AUTHOR{ "mzed" };
-  MIN_RELATED{ "boids" };
+  MIN_TAGS        { "chaos, ui" };
+  MIN_AUTHOR      { "mzed" };
+  MIN_RELATED     { "boids" };
   
   inlet<>  input { this, "toggle on/off, reset" };
   outlet<> out1 { this, "position of yellow mosher" };
   outlet<> out2 { this, "all of the moshers, by type" };
   
-  mzed_moshpit(const atoms& args = {}) :
-  ui_operator::ui_operator{ this, args },
-  r{},
-  mpX{},
-  mpY{},
-  type{},
-  vx{},
-  vy{},
-  fx{},
-  fy{},
-  col{}
+  mzed_moshpit(const atoms& args = {}) : ui_operator::ui_operator{ this, args }
   {
     // calculate sidelength
     lx = 1.03 * sqrt(M_PI * RADIUS * RADIUS * numMoshers);
@@ -49,15 +39,8 @@ public:
     m_size[0] = lx / FR;
     m_size[1] = ly / FR;
     
-    for (size_t i {}; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
-    {
-      cells.push_back(0);
-    }
-    
-    for (size_t i {}; i < (m_size[0] * m_size[1]); ++i)
-    {
-      count[i] = 0;
-    }
+    cells.resize((m_size[0] * m_size[1] * NMAX * 10), 0); //TODO: big should this be?
+    count.fill(0);
     
     // init_circle(x);
     bool uniq { true } ;
@@ -206,24 +189,22 @@ public:
   
 private:
   
-  double r[ARRAY_SIZE];
-  double mpX[ARRAY_SIZE];
-  double mpY[ARRAY_SIZE];
-  size_t type[ARRAY_SIZE];
-  double vx[ARRAY_SIZE];
-  double vy[ARRAY_SIZE];
-  double fx[ARRAY_SIZE];
-  double fy[ARRAY_SIZE];
-  double col[ARRAY_SIZE];
-  
-  
+  double r[ARRAY_SIZE] {};
+  double mpX[ARRAY_SIZE] {};
+  double mpY[ARRAY_SIZE] {};
+  size_t type[ARRAY_SIZE] {};
+  double vx[ARRAY_SIZE] {};
+  double vy[ARRAY_SIZE] {};
+  double fx[ARRAY_SIZE] {};
+  double fy[ARRAY_SIZE] {};
+  double col[ARRAY_SIZE] {};
   
   //neighbor list
-  int lx;
-  int ly;
+  int lx {};
+  int ly {};
   int m_size[2] { 0, 0 };
-  std::vector<int> cells { 0, (m_size[0] * m_size[1] * NMAX * 10) };
-  int count[ARRAY_SIZE];
+  std::vector<int> cells {};
+  std::array<int, ARRAY_SIZE> count {};
   
   //things we can change
   int pbc[2] { 1, 1 };
@@ -231,10 +212,11 @@ private:
   
   const color greyColor { 0.5, 0.5, 0.5, 0.8 };
   const color redColor { 1.0, 0.3, 0.0, 0.8 }; //really orange
+  const color yellowColor { 1.0, 1.0, 0., 0.8 };
   
   //////////////////////////////////////////////////////////////    functions
   
-  int moshpit_mod_rvec(int a, int b, int p, int* image)
+  int moshpit_mod_rvec(const int a, const int b, const int p, int* image)
   {
     *image = 1;
     
@@ -261,17 +243,14 @@ private:
   
   void nbl_bin()
   {
-    for (size_t i {}; i < (m_size[0] * m_size[1]); ++i)
-    {
-      count[i] = 0;
-    }
+    count.fill(0);
     
-    for (int i {}; i < numMoshers; ++i)
+    for (int mosher {}; mosher < numMoshers; ++mosher)
     {
-      const size_t indX { static_cast<size_t>(mpX[i] / lx * m_size[0]) };
-      const size_t indY { static_cast<size_t>(mpY[i] / ly * m_size[1]) };
+      const size_t indX { static_cast<size_t>(mpX[mosher] / lx * m_size[0]) };
+      const size_t indY { static_cast<size_t>(mpY[mosher] / ly * m_size[1]) };
       const size_t tt { indX + indY * m_size[0] };
-      cells[NMAX * tt + count[tt]] = i;
+      cells[NMAX * tt + count[tt]] = mosher;
       ++count[tt];
     }
   }
@@ -281,28 +260,27 @@ private:
     return (double)rand() / (double)RAND_MAX;
   }
   
-  inline double mymod(double a, double b)
+  inline double mymod(const double a, const double b)
   { //TODO: MZ why?
     return a - b * floor(a / b) + b * (a < 0);
   }
   
   void update()
   {
-    // double colavg = 0.0;  //Doesn't seem like I need this
     int image[2] { 0, 0 };
     
-    for (size_t i {}; i < numMoshers; ++i)
+    for (size_t mosher {}; mosher < numMoshers; ++mosher)
     {
-      col[i] = 0.0;
-      fx[i] = 0.0;
-      fy[i] = 0.0;
+      col[mosher] = 0.0;
+      fx[mosher] = 0.0;
+      fy[mosher] = 0.0;
       
       double wx {};
       double wy {};
       long neigh {};
       
-      int indX { static_cast<int>(mpX[i] / lx * m_size[0]) };
-      int indY { static_cast<int>(mpY[i] / ly * m_size[1]) };
+      int indX { static_cast<int>(mpX[mosher] / lx * m_size[0]) };
+      int indY { static_cast<int>(mpY[mosher] / ly * m_size[1]) };
       
       for (int ttx { -1 }; ttx <= 1; ++ttx)
       {
@@ -321,26 +299,25 @@ private:
             for (int cc {}; cc < count[cell]; ++cc)
             {
               long j { cells[NMAX * cell + cc] };
-              double dx { mpX[j] - mpX[i] };
+              double dx { mpX[j] - mpX[mosher] };
               if (image[0]) dx += lx * ttx;
               
-              double dy { mpY[j] - mpY[i] };
+              double dy { mpY[j] - mpY[mosher] };
               if (image[1]) dy += ly * tty;
               
               double l { sqrt(dx * dx + dy * dy) };
               if (l > 1e-6 && l < TWO_R)
               {
-                double r0 { r[i] + r[j] };
+                double r0 { r[mosher] + r[j] };
                 double f { (1 - l / r0) };
                 double c0 { -(epsilon) * f * f * (l < r0) };
                 
-                fx[i] += c0 * dx;
-                fy[i] += c0 * dy;
-                double tcol { c0 * c0 * dx * dx + c0 * c0 * dy * dy }; //fx[i]*fx[i] + fy[i]*fy[i]
-                col[i] += tcol;
+                fx[mosher] += c0 * dx;
+                fy[mosher] += c0 * dy;
+                col[mosher] +=  c0 * c0 * dx * dx + c0 * c0 * dy * dy; //fx[i]*fx[i] + fy[i]*fy[i]
               }
               
-              if (type[i] > 0 && type[j] > 0 && l > 1e-6 && l < FR)
+              if (type[mosher] > 0 && type[j] > 0 && l > 1e-6 && l < FR)
               {
                 wx += vx[j];
                 wy += vy[j];
@@ -353,70 +330,69 @@ private:
       
       const double wlen = (wx * wx + wy * wy);
       
-      if (type[i] > 0 && neigh > 0 && wlen > 1e-6)
+      if (type[mosher] > 0 && neigh > 0 && wlen > 1e-6)
       {
-        fx[i] += flock * wx / wlen;
-        fy[i] += flock * wy / wlen;
+        fx[mosher] += flock * wx / wlen;
+        fy[mosher] += flock * wy / wlen;
       }
       
-      const double vlen = vx[i] * vx[i] + vy[i] * vy[i];
-      const double vhap = type[i] > 0 ? VHAPPY: 0.;
+      const double vlen = vx[mosher] * vx[mosher] + vy[mosher] * vy[mosher];
+      const double vhap = type[mosher] > 0 ? VHAPPY: 0.;
 
       if (vlen > 1e-6)
       {
-        fx[i] += DAMP * (vhap - vlen) * vx[i] / vlen;
-        fy[i] += DAMP * (vhap - vlen) * vy[i] / vlen;
+        fx[mosher] += DAMP * (vhap - vlen) * vx[mosher] / vlen;
+        fy[mosher] += DAMP * (vhap - vlen) * vy[mosher] / vlen;
       }
       
-      if (type[i] > 0)
+      if (type[mosher] > 0)
       {
-        fx[i] += noise * (normRand() - 0.5);
-        fy[i] += noise * (normRand() - 0.5);
+        fx[mosher] += noise * (normRand() - 0.5);
+        fy[mosher] += noise * (normRand() - 0.5);
       }
-      //Some keys stuff here, which I ignored
-      //colavg += x->col[i];
     }
-    for (size_t i {}; i < numMoshers; ++i)
+    
+    for (size_t mosher {}; mosher < numMoshers; ++mosher)
     {
-      vx[i] += fx[i] * GDT;
-      vy[i] += fy[i] * GDT;
-      mpX[i] += vx[i] * GDT;
-      mpY[i] += vy[i] * GDT;
+      vx[mosher] += fx[mosher] * GDT;
+      vy[mosher] += fy[mosher] * GDT;
+      mpX[mosher] += vx[mosher] * GDT;
+      mpY[mosher] += vy[mosher] * GDT;
       
       if (pbc[0] == 0)
       {
-        if (mpX[i] >= lx)
+        if (mpX[mosher] >= lx)
         {
-          mpX[i] = 2 * lx - mpX[i];
-          vx[i] *= -1;
+          mpX[mosher] = 2 * lx - mpX[mosher];
+          vx[mosher] *= -1;
         }
-        if (mpX[i] < 0)
+        if (mpX[mosher] < 0)
         {
-          mpX[i] = -(mpX[i]);
-          vx[i] *= -1;
+          mpX[mosher] = -(mpX[mosher]);
+          vx[mosher] *= -1;
         }
       }
       else
       {
-        if (mpX[i] >= lx || mpX[i] < 0) mpX[i] = mymod(mpX[i], lx);
+        if (mpX[mosher] >= lx || mpX[mosher] < 0) mpX[mosher] = mymod(mpX[mosher], lx);
       }
       
       if (pbc[1] == 0)
       {
-        if (mpY[i] >= ly)
+        if (mpY[mosher] >= ly)
         {
-          mpY[i] = 2 * ly - mpY[i];
-          vy[i] *= -1;
+          mpY[mosher] = 2 * ly - mpY[mosher];
+          vy[mosher] *= -1;
         }
-        if (mpY[i] < 0)
+        if (mpY[mosher] < 0)
         {
-          mpY[i] = -(mpY[i]);
-          vy[i] *= -1;
+          mpY[mosher] = -(mpY[mosher]);
+          vy[mosher] *= -1;
         }
       }
       else
       {
-        if (mpY[i] >= ly || mpY[i] < 0) mpY[i] = mymod(mpY[i], ly);
+        if (mpY[mosher] >= ly || mpY[mosher] < 0) mpY[mosher] = mymod(mpY[mosher], ly);
       }
       /*
        TODO: Do I need this?
@@ -425,8 +401,6 @@ private:
         graph_vel(sqrt(x->vx[i]*x->vx[i] + x->vy[i]* x->vy[i]));
        }*/
     }
-    
-    //colavg /= numMoshers;
   }
   
   void draw_all(target t)
@@ -435,23 +409,23 @@ private:
     const double sy { t.height() / ly };
     const double ss { sqrt(sx * sy) * 2.0 };
     
-    for (size_t i {}; i < numMoshers; ++i)
+    for (size_t mosher {}; mosher < numMoshers; ++mosher)
     {
-      const double cr { std::clamp(fabs(col[i] / 25), 0.0, 1.0) };
+      const double cr { std::clamp(fabs(col[mosher] / 25), 0.0, 1.0) };
       
       if (drawing)
       {
         color mosherColor;
         
-        if (type[i] == 0)
+        if (type[mosher] == 0)
         {
           if (showforce == true) mosherColor = { cr, cr, cr, 0.8 };
           else mosherColor = greyColor;
         }
-        else if (type[i] == 2) // yellow
+        else if (type[mosher] == 2) // yellow
         {
           if (showforce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
-          else mosherColor = { 1.0, 1.0, 0., 0.8 };
+          else mosherColor = yellowColor;
         }
         else
         {
@@ -459,18 +433,19 @@ private:
           else mosherColor = redColor;
         }
         
-        double shim = ss * r[i] * 0.5;
-        ellipse<fill> mosher
+        const double shim { ss * r[mosher] * 0.5 };
+        
+        ellipse<fill> mosherEllipse
         {
           t,
           color{ mosherColor },
-          position{ sx * mpX[i] - shim, sy * mpY[i] - shim },
-          size{ ss * r[i], ss * r[i] }
+          position{ sx * mpX[mosher] - shim, sy * mpY[mosher] - shim },
+          size{ ss * r[mosher], ss * r[mosher] }
         };
       }
       
-      out2.send(int(i), int(type[i]), sx * mpX[i], sy * mpY[i], cr * 100);
-      out1.send(sx * mpX[i], sy * mpY[i], cr * 100);
+      out2.send(int(mosher), int(type[mosher]), sx * mpX[mosher], sy * mpY[mosher], cr * 100);
+      out1.send(sx * mpX[mosher], sy * mpY[mosher], cr * 100);
     }
   }
 };
