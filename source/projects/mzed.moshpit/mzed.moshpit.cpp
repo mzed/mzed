@@ -108,17 +108,57 @@ public:
   
   attribute<int> numMoshers  //TODO: Threadsafe?
   {
-    this, "number of moshers", 300,
-    range {1, 8192}
+    this, "numMoshers", 300,
+    title { "number of moshers" },
+    description { "How many moshers (active and passive) in the pit." },
+    range { 1, 8192 }
   };
   
-  attribute<double> noise { this, "noise", 3.0 };
-  attribute<double> flock { this, "flock", 1.0 };
-  attribute<double> fractionRed { this, "fraction red", 0.15 };
-  attribute<int> frameskip { this, "frames between renders", 2 };
-  attribute<int> framerate { this, "frames per second", 30 };
-  attribute<bool> showforce { this, "showforce", false };
-  attribute<bool> drawing { this, "draw circles", true };
+  attribute<double> noise 
+  {
+    this, "noise", 3.0,
+    description { "How energetic the active moshers are."}
+  };
+  
+  attribute<double> flock
+  {
+    this, "flock", 1.0,
+    description { "Propoerty of active moshes to stay together." }
+  };
+  
+  attribute<double> fractionRed 
+  {
+    this, "fractionRed", 0.15,
+    description { "Proportion of active moshers." }
+  };
+  
+  attribute<int> frameskip 
+  {
+    this, "frameSkip", 2,
+    title { "frame skip" },
+    description { "Number of particle frames for each drawing frame." }
+  };
+  
+  attribute<int> framerate
+  { 
+    this, "fps", 30,
+    title { "frames per second" },
+    description { "Frequency of redrawing."}
+  };
+  
+  attribute<bool> showForce
+  {
+    this, "showForce", false,
+    title { "show force" },
+    description {"Visualized force being applied to each individual mosher."},
+  };
+  
+  attribute<bool> drawing 
+  {
+    this, "draw", true,
+    title { "draw circles" },
+    description { "Toggles drawing on or off." }
+  };
   
   //////////////////////////////////////////////////////////////    messages
   
@@ -134,10 +174,10 @@ public:
   
   message<> bang
   {
-    this, "bang", "ahoy",
+    this, "bang", "redraw",
     MIN_FUNCTION
     {
-      out1.send("ahoy");       // send out our outlet
+      redraw();
       return {};
     }
   };
@@ -419,17 +459,17 @@ private:
         
         if (type[mosher] == 0)
         {
-          if (showforce == true) mosherColor = { cr, cr, cr, 0.8 };
+          if (showForce == true) mosherColor = { cr, cr, cr, 0.8 };
           else mosherColor = greyColor;
         }
         else if (type[mosher] == 2) // yellow
         {
-          if (showforce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
+          if (showForce == true) mosherColor = { 1.0, 1.0, 0.0, cr };
           else mosherColor = yellowColor;
         }
         else
         {
-          if (showforce == true) mosherColor = { 1.0, 0.0, 0.0, cr };
+          if (showForce == true) mosherColor = { 1.0, 0.0, 0.0, cr };
           else mosherColor = redColor;
         }
         

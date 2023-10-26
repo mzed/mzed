@@ -88,6 +88,31 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-20",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 50.0, 296.0, 33.0 ],
+									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 24.0,
+									"id" : "obj-3",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 33.0 ],
+									"text" : "mzed.MoshPit"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-7",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -99,7 +124,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "draw circles",
+									"attr" : "draw",
 									"id" : "obj-2",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -490,7 +515,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 385.0, 180.0, 67.0, 22.0 ],
+									"patching_rect" : [ 385.0, 180.0, 100.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -498,7 +523,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p moshers"
+									"text" : "p active-moshers"
 								}
 
 							}
@@ -871,7 +896,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 214.0, 180.0, 91.0, 22.0 ],
+									"patching_rect" : [ 214.0, 180.0, 109.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -879,7 +904,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p non-moshers"
+									"text" : "p passive-moshers"
 								}
 
 							}
@@ -891,45 +916,6 @@
 									"numoutlets" : 4,
 									"outlettype" : [ "list", "list", "int", "" ],
 									"patching_rect" : [ 214.0, 214.0, 157.0, 159.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"id" : "obj-20",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 50.0, 296.0, 33.0 ],
-									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 0.392156862745098 ],
-									"id" : "obj-24",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
-									"proportion" : 0.39
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 24.0,
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 33.0 ],
-									"text" : "mzed.MoshPit"
 								}
 
 							}
@@ -954,6 +940,21 @@
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 38.0, 131.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
+									"proportion" : 0.39
 								}
 
 							}
@@ -1099,6 +1100,7 @@
 									"maxclass" : "mzed.moshpit",
 									"numinlets" : 1,
 									"numoutlets" : 2,
+									"on" : 1,
 									"outlettype" : [ "", "" ],
 									"patching_rect" : [ 51.0, 194.0, 286.0, 286.0 ]
 								}
@@ -1113,18 +1115,6 @@
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 155.0, 519.0, 50.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"id" : "obj-11",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 105.5, 145.0, 54.0, 24.0 ],
-									"text" : "reset"
 								}
 
 							}
@@ -1204,66 +1194,76 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frames between renders",
+									"attr" : "frameSkip",
+									"attr_display" : 1,
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 289.0, 133.0, 150.0, 22.0 ]
+									"patching_rect" : [ 209.0, 120.0, 193.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frames per second",
+									"attr" : "fps",
+									"attr_display" : 1,
 									"id" : "obj-9",
 									"maxclass" : "attrui",
+									"menu_display" : 2,
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 289.0, 103.0, 150.0, 22.0 ]
+									"patching_rect" : [ 209.0, 96.0, 193.0, 22.0 ],
+									"text_width" : 142.0,
+									"varname" : "attrui"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"attr" : "flock",
+									"attr_display" : 1,
 									"id" : "obj-8",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 147.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 125.0, 150.0, 22.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"attr" : "noise",
+									"attr_display" : 1,
 									"id" : "obj-7",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 110.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 101.0, 150.0, 22.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "number of moshers",
+									"attr" : "numMoshers",
+									"attr_display" : 1,
 									"id" : "obj-4",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 79.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 77.0, 175.0, 22.0 ],
+									"text_width" : 130.0
 								}
 
 							}
@@ -1294,14 +1294,15 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "showforce",
+									"attr" : "showForce",
+									"attr_display" : 1,
 									"id" : "obj-1",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 180.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 151.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -1955,27 +1956,31 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frames between renders",
+									"attr" : "frameSkip",
+									"attr_display" : 1,
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 87.0, 157.0, 150.0, 22.0 ]
+									"patching_rect" : [ 87.0, 157.0, 201.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frames per second",
+									"attr" : "fps",
+									"attr_display" : 1,
 									"id" : "obj-9",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 87.0, 133.0, 150.0, 22.0 ]
+									"patching_rect" : [ 87.0, 133.0, 201.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
@@ -1988,7 +1993,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 239.0, 157.0, 150.0, 22.0 ]
+									"patching_rect" : [ 308.0, 161.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -2001,7 +2006,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 239.0, 134.0, 150.0, 22.0 ]
+									"patching_rect" : [ 308.0, 138.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -2228,28 +2233,28 @@
 , 			{
 				"name" : "rchoose.maxpat",
 				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rgrain.maxpat",
 				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rgrano.maxpat",
 				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "transratio.maxpat",
 				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
-				"patcherrelativepath" : "../../../Library/Application Support/Cycling '74/Max 8/Examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
 				"type" : "JSON",
 				"implicit" : 1
 			}
