@@ -30,14 +30,14 @@
 
 	<methodlist>
 
+		<method name='bang'>
+			<digest>redraw </digest>
+			<description>redraw </description>
+		</method>
+
 		<method name='int'>
 			<digest>Turn on/off the internal timer</digest>
 			<description>Turn on/off the internal timer. </description>
-		</method>
-
-		<method name='bang'>
-			<digest>ahoy </digest>
-			<description>ahoy </description>
 		</method>
 
 	</methodlist>
@@ -47,49 +47,49 @@
 
 	<attributelist>
 
+		<attribute name='draw' get='1' set='1' type='long' size='1' >
+			<digest>Toggles drawing on or off</digest>
+			<description>Toggles drawing on or off. </description>
+		</attribute>
+
+		<attribute name='showForce' get='1' set='1' type='long' size='1' >
+			<digest>Visualized force being applied to each individual mosher</digest>
+			<description>Visualized force being applied to each individual mosher. </description>
+		</attribute>
+
+		<attribute name='frameSkip' get='1' set='1' type='long' size='1' >
+			<digest>Number of particle frames for each drawing frame</digest>
+			<description>Number of particle frames for each drawing frame. </description>
+		</attribute>
+
 		<attribute name='on' get='1' set='1' type='long' size='1' >
 			<digest>Turn on/off the internal timer</digest>
 			<description>Turn on/off the internal timer. </description>
 		</attribute>
 
-		<attribute name='frames per second' get='1' set='1' type='long' size='1' >
-			<digest></digest>
-			<description></description>
-		</attribute>
-
-		<attribute name='fraction red' get='1' set='1' type='float64' size='1' >
-			<digest></digest>
-			<description></description>
-		</attribute>
-
-		<attribute name='number of moshers' get='1' set='1' type='long' size='1' >
-			<digest></digest>
-			<description></description>
-		</attribute>
-
-		<attribute name='noise' get='1' set='1' type='float64' size='1' >
-			<digest></digest>
-			<description></description>
+		<attribute name='fractionRed' get='1' set='1' type='float64' size='1' >
+			<digest>Proportion of active moshers</digest>
+			<description>Proportion of active moshers. </description>
 		</attribute>
 
 		<attribute name='flock' get='1' set='1' type='float64' size='1' >
-			<digest></digest>
-			<description></description>
+			<digest>Propoerty of active moshes to stay together</digest>
+			<description>Propoerty of active moshes to stay together. </description>
 		</attribute>
 
-		<attribute name='frames between renders' get='1' set='1' type='long' size='1' >
-			<digest></digest>
-			<description></description>
+		<attribute name='fps' get='1' set='1' type='long' size='1' >
+			<digest>Frequency of redrawing</digest>
+			<description>Frequency of redrawing. </description>
 		</attribute>
 
-		<attribute name='showforce' get='1' set='1' type='long' size='1' >
-			<digest></digest>
-			<description></description>
+		<attribute name='noise' get='1' set='1' type='float64' size='1' >
+			<digest>How energetic the active moshers are</digest>
+			<description>How energetic the active moshers are. </description>
 		</attribute>
 
-		<attribute name='draw circles' get='1' set='1' type='long' size='1' >
-			<digest></digest>
-			<description></description>
+		<attribute name='numMoshers' get='1' set='1' type='long' size='1' >
+			<digest>How many moshers (active and passive) in the pit</digest>
+			<description>How many moshers (active and passive) in the pit. </description>
 		</attribute>
 
 	</attributelist>

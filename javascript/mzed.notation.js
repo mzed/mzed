@@ -17,10 +17,13 @@ var tqSharpImg = new MGraphicsSVG("jsNote8.svg");
 var tqFlatImg = new MGraphicsSVG("jsNote9.svg");
 
 var notes = new Array();
+
 var noteSpace = 1.5;
 declareattribute("noteSpace");
+
 var microTone = 1;
 declareattribute("microTone");
+
 var accidents = 0;
 var ledger = 0;
 
@@ -29,6 +32,7 @@ declareattribute("mode");
 
 var bgcolor = [1.,1.,1., 1.]
 declareattribute("bgcolor");
+
 var lineWidth = 1.5;
 var width = this.box.rect[2] - this.box.rect[0];
 var height = this.box.rect[3] - this.box.rect[1];
@@ -68,7 +72,7 @@ function svg_draw(x, y, s, myFile)
 {
 	with (mgraphics)
 	{
-		translate (x, y);
+	    translate (x, y);
 		scale (s, s);
 		svg_render(myFile);
 		scale (1  / s, 1 / s);

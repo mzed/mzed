@@ -3,8 +3,8 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 2,
+			"minor" : 5,
+			"revision" : 6,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -50,14 +50,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 6,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 100.0, 126.0, 688.0, 560.0 ],
+						"rect" : [ 0.0, 26.0, 688.0, 560.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -88,6 +88,31 @@
 						"assistshowspatchername" : 0,
 						"boxes" : [ 							{
 								"box" : 								{
+									"id" : "obj-20",
+									"linecount" : 2,
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 50.0, 296.0, 33.0 ],
+									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"fontface" : 1,
+									"fontsize" : 24.0,
+									"id" : "obj-3",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 33.0 ],
+									"text" : "mzed.MoshPit"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"id" : "obj-7",
 									"maxclass" : "comment",
 									"numinlets" : 1,
@@ -99,7 +124,7 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "drawing",
+									"attr" : "draw",
 									"id" : "obj-2",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
@@ -117,7 +142,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 373.5, 396.5, 90.0, 48.0 ],
+									"patching_rect" : [ 373.5, 396.5, 90.0, 47.0 ],
 									"text" : "type 1 = grey\ntype 2 = red\ntype 3 = yellow"
 								}
 
@@ -129,7 +154,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 58.0, 386.5, 247.0, 34.0 ],
+									"patching_rect" : [ 58.0, 386.5, 247.0, 33.0 ],
 									"text" : "All particles are output from the right outlet as <index>, <type>, <x>, <y>, <force> lists"
 								}
 
@@ -157,8 +182,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 5,
+											"revision" : 6,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -332,7 +357,7 @@
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
-													"outlettype" : [ "list" ],
+													"outlettype" : [ "" ],
 													"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
 												}
 
@@ -490,7 +515,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 385.0, 180.0, 67.0, 22.0 ],
+									"patching_rect" : [ 385.0, 180.0, 100.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -498,7 +523,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p moshers"
+									"text" : "p active-moshers"
 								}
 
 							}
@@ -519,13 +544,13 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "", "list" ],
+									"outlettype" : [ "", "" ],
 									"patcher" : 									{
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 5,
+											"revision" : 6,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -711,7 +736,7 @@
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
-													"outlettype" : [ "list" ],
+													"outlettype" : [ "" ],
 													"patching_rect" : [ 50.0, 40.0, 30.0, 30.0 ]
 												}
 
@@ -871,7 +896,7 @@
  ]
 									}
 ,
-									"patching_rect" : [ 214.0, 180.0, 91.0, 22.0 ],
+									"patching_rect" : [ 214.0, 180.0, 109.0, 22.0 ],
 									"saved_object_attributes" : 									{
 										"description" : "",
 										"digest" : "",
@@ -879,7 +904,7 @@
 										"tags" : ""
 									}
 ,
-									"text" : "p non-moshers"
+									"text" : "p passive-moshers"
 								}
 
 							}
@@ -896,52 +921,13 @@
 							}
 , 							{
 								"box" : 								{
-									"id" : "obj-20",
-									"linecount" : 2,
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 50.0, 296.0, 34.0 ],
-									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"angle" : 270.0,
-									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 0.392156862745098 ],
-									"id" : "obj-24",
-									"maxclass" : "panel",
-									"mode" : 0,
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
-									"proportion" : 0.39
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"fontface" : 1,
-									"fontsize" : 24.0,
-									"id" : "obj-3",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
-									"text" : "mzed.MoshPit"
-								}
-
-							}
-, 							{
-								"box" : 								{
 									"id" : "obj-5",
-									"maxclass" : "moshpit",
+									"maxclass" : "mzed.moshpit",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 38.0, 214.0, 153.0, 153.0 ],
-									"trackmouse" : 0
+									"on" : 1,
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 38.0, 214.0, 151.0, 159.0 ]
 								}
 
 							}
@@ -954,6 +940,21 @@
 									"outlettype" : [ "int" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 38.0, 131.0, 24.0, 24.0 ]
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"angle" : 270.0,
+									"background" : 1,
+									"bgcolor" : [ 1.0, 0.301960784313725, 0.0, 1.0 ],
+									"id" : "obj-24",
+									"maxclass" : "panel",
+									"mode" : 0,
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 17.0, 15.0, 296.0, 69.0 ],
+									"proportion" : 0.39
 								}
 
 							}
@@ -1033,14 +1034,14 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 6,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
 ,
 						"classnamespace" : "box",
-						"rect" : [ 0.0, 26.0, 688.0, 560.0 ],
+						"rect" : [ 100.0, 126.0, 688.0, 560.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1076,7 +1077,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 353.0, 474.5, 321.0, 75.0 ],
+									"patching_rect" : [ 353.0, 474.5, 321.0, 74.0 ],
 									"text" : "By Michael Zbyszyński, Goldsmiths University of London\nThis mosh pit simulator is based on research by Jesse Silverberg and Matthew Bierbaum. See: http://cohengroup.lassp.cornell.edu/projects/collective-motion-mosh-pits"
 								}
 
@@ -1088,7 +1089,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 50.0, 296.0, 34.0 ],
+									"patching_rect" : [ 17.0, 50.0, 296.0, 33.0 ],
 									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
 								}
 
@@ -1114,18 +1115,6 @@
 									"outlettype" : [ "", "bang" ],
 									"parameter_enable" : 0,
 									"patching_rect" : [ 155.0, 519.0, 50.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"bubble" : 1,
-									"id" : "obj-11",
-									"maxclass" : "comment",
-									"numinlets" : 1,
-									"numoutlets" : 0,
-									"patching_rect" : [ 105.5, 145.0, 54.0, 24.0 ],
-									"text" : "reset"
 								}
 
 							}
@@ -1162,7 +1151,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 209.0, 511.5, 128.0, 38.0 ],
+									"patching_rect" : [ 209.0, 511.5, 128.0, 37.0 ],
 									"text" : "position of yellow mosher (x, y, force)"
 								}
 
@@ -1205,79 +1194,76 @@
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frameskip",
+									"attr" : "frameSkip",
+									"attr_display" : 1,
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 289.0, 133.0, 150.0, 22.0 ]
+									"patching_rect" : [ 209.0, 120.0, 193.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "framerate",
+									"attr" : "fps",
+									"attr_display" : 1,
 									"id" : "obj-9",
 									"maxclass" : "attrui",
+									"menu_display" : 2,
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 289.0, 103.0, 150.0, 22.0 ]
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"attr" : "boxsize",
-									"id" : "obj-2",
-									"maxclass" : "attrui",
-									"numinlets" : 1,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 182.0, 150.0, 22.0 ]
+									"patching_rect" : [ 209.0, 96.0, 193.0, 22.0 ],
+									"text_width" : 142.0,
+									"varname" : "attrui"
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"attr" : "flock",
+									"attr_display" : 1,
 									"id" : "obj-8",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 147.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 125.0, 150.0, 22.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"attr" : "noise",
+									"attr_display" : 1,
 									"id" : "obj-7",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 110.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 101.0, 150.0, 22.0 ]
 								}
 
 							}
 , 							{
 								"box" : 								{
 									"attr" : "numMoshers",
+									"attr_display" : 1,
 									"id" : "obj-4",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 62.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 77.0, 175.0, 22.0 ],
+									"text_width" : 130.0
 								}
 
 							}
@@ -1301,21 +1287,22 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
+									"patching_rect" : [ 17.0, 15.0, 296.0, 33.0 ],
 									"text" : "mzed.MoshPit"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "showforce",
+									"attr" : "showForce",
+									"attr_display" : 1,
 									"id" : "obj-1",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 455.0, 216.0, 150.0, 22.0 ]
+									"patching_rect" : [ 455.0, 151.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -1395,13 +1382,6 @@
 , 							{
 								"patchline" : 								{
 									"destination" : [ "obj-5", 0 ],
-									"source" : [ "obj-2", 0 ]
-								}
-
-							}
-, 							{
-								"patchline" : 								{
-									"destination" : [ "obj-5", 0 ],
 									"source" : [ "obj-4", 0 ]
 								}
 
@@ -1467,8 +1447,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 2,
+							"minor" : 5,
+							"revision" : 6,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1510,7 +1490,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 50.0, 296.0, 34.0 ],
+									"patching_rect" : [ 17.0, 50.0, 296.0, 33.0 ],
 									"text" : "A two-dimensional model of moshers, similar to a disordered gas."
 								}
 
@@ -1523,7 +1503,7 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 17.0, 15.0, 296.0, 34.0 ],
+									"patching_rect" : [ 17.0, 15.0, 296.0, 33.0 ],
 									"text" : "mzed.MoshPit"
 								}
 
@@ -1531,12 +1511,11 @@
 , 							{
 								"box" : 								{
 									"id" : "obj-5",
-									"maxclass" : "moshpit",
+									"maxclass" : "mzed.moshpit",
 									"numinlets" : 1,
 									"numoutlets" : 2,
-									"outlettype" : [ "list", "list" ],
-									"patching_rect" : [ 38.0, 214.0, 286.0, 286.0 ],
-									"trackmouse" : 0
+									"outlettype" : [ "", "" ],
+									"patching_rect" : [ 38.0, 214.0, 286.0, 286.0 ]
 								}
 
 							}
@@ -1587,8 +1566,8 @@
 										"fileversion" : 1,
 										"appversion" : 										{
 											"major" : 8,
-											"minor" : 3,
-											"revision" : 2,
+											"minor" : 5,
+											"revision" : 6,
 											"architecture" : "x64",
 											"modernui" : 1
 										}
@@ -1727,7 +1706,7 @@
 													"maxclass" : "inlet",
 													"numinlets" : 0,
 													"numoutlets" : 1,
-													"outlettype" : [ "list" ],
+													"outlettype" : [ "" ],
 													"patching_rect" : [ 99.0, 40.0, 30.0, 30.0 ]
 												}
 
@@ -1970,34 +1949,38 @@
 									"maxclass" : "comment",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 441.0, 297.0, 172.0, 52.0 ],
+									"patching_rect" : [ 441.0, 297.0, 172.0, 51.0 ],
 									"text" : "replace this argument with a soundfile in your search path"
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "frameskip",
+									"attr" : "frameSkip",
+									"attr_display" : 1,
 									"id" : "obj-10",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 87.0, 157.0, 150.0, 22.0 ]
+									"patching_rect" : [ 87.0, 157.0, 201.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
 , 							{
 								"box" : 								{
-									"attr" : "framerate",
+									"attr" : "fps",
+									"attr_display" : 1,
 									"id" : "obj-9",
 									"maxclass" : "attrui",
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 87.0, 133.0, 150.0, 22.0 ]
+									"patching_rect" : [ 87.0, 133.0, 201.0, 22.0 ],
+									"text_width" : 158.0
 								}
 
 							}
@@ -2010,7 +1993,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 239.0, 157.0, 150.0, 22.0 ]
+									"patching_rect" : [ 308.0, 161.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -2023,7 +2006,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"parameter_enable" : 0,
-									"patching_rect" : [ 239.0, 134.0, 150.0, 22.0 ]
+									"patching_rect" : [ 308.0, 138.0, 150.0, 22.0 ]
 								}
 
 							}
@@ -2244,38 +2227,34 @@
 		}
 ,
 		"dependency_cache" : [ 			{
-				"name" : "moshpit.mxe64",
-				"type" : "mx64"
-			}
-, 			{
-				"name" : "mzed.moshpit.mxe64",
-				"type" : "mx64"
+				"name" : "mzed.moshpit.mxo",
+				"type" : "iLaX"
 			}
 , 			{
 				"name" : "rchoose.maxpat",
-				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rgrain.maxpat",
-				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rgrano.maxpat",
-				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
-				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/sampling/granular/lib",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/sampling/granular/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "transratio.maxpat",
-				"bootpath" : "~/AppData/Roaming/Cycling '74/Max 8/examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
-				"patcherrelativepath" : "../../../../../AppData/Roaming/Cycling '74/Max 8/examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
+				"bootpath" : "~/Library/Application Support/Cycling '74/Max 8/Examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
+				"patcherrelativepath" : "../../../../../Library/Application Support/Cycling '74/Max 8/Examples/max-tricks/notes-and-pitch/pitch-to-freq-ratio",
 				"type" : "JSON",
 				"implicit" : 1
 			}
