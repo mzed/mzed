@@ -8,14 +8,14 @@
 using namespace c74::min;
 using namespace c74::min::ui;
 
-constexpr size_t ARRAY_SIZE = 1024;
-constexpr size_t NMAX = 50;
-constexpr double RADIUS = 1.0;
-constexpr size_t TWO_R = 2;
-constexpr size_t FR = 2;
-constexpr double VHAPPY = 1.0;
-constexpr double DAMP = 1.0;
-constexpr double GDT = 0.1;
+constexpr size_t ARRAY_SIZE{ 1024 };
+constexpr size_t NMAX{ 50 };
+constexpr double RADIUS{ 1.0 };
+constexpr size_t TWO_R{ 2 };    
+constexpr size_t FR{ 2 };
+constexpr double VHAPPY{ 1.0 };
+constexpr double DAMP{ 1.0 };
+constexpr double GDT{ 0.1 };
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
@@ -49,11 +49,8 @@ public:
         m_size[0] = long(lx / FR);
         m_size[1] = long(ly / FR);
 
-        for (size_t i = 0; i < (m_size[0] * m_size[1] * NMAX * 10); ++i) //TODO: big should this be?
-        {
-            cells.push_back(0);
-        }
-
+        cells((m_size[0] * m_size[1] * NMAX * 10), 0);
+          
         for (size_t i = 0; i < (m_size[0] * m_size[1]); ++i)
         {
             count[i] = 0;

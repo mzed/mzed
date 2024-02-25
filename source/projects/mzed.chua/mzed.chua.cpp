@@ -1,6 +1,6 @@
 ﻿/// @file
 ///	@ingroup 	mzed
-///	@copyright	Copyright 2002-2021 Michael Zbyszyński  All rights reserved.
+///	@copyright	Copyright 2002-2024 Michael Zbyszyński  All rights reserved.
 ///	@license	Use of this source code is governed by the GPL v3 License found in the License.md file.
 
 #include "c74_min.h"
@@ -86,10 +86,10 @@ public:
         MIN_FUNCTION
         {
             // calculate the attractor
-            double zNew = currentZ + (c_h * -c_c * currentY);
-            double yNew = currentY + (c_h * c_b * (currentX - currentY + currentZ));
-            float g = (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1));
-            double xNew = currentX + (c_h * c_a * (currentY - currentX - g));
+            const double zNew { currentZ + (c_h * -c_c * currentY) };
+            const double yNew{ currentY + (c_h * c_b * (currentX - currentY + currentZ)) };
+            const double g{ (c_e * currentX) + (c_d + c_e) * (fabs(currentX + 1) - fabs(currentX - 1)) };
+            const double xNew{ currentX + (c_h * c_a * (currentY - currentX - g)) };
            
             // save the calculated values
             currentX = xNew;
@@ -117,9 +117,9 @@ public:
     };
 
 private:
-    double currentX = 1.0;
-    double currentY = 1.0;
-    double currentZ = 1.0;
+    double currentX { 1.0 };
+    double currentY { 1.0 };
+    double currentZ { 1.0 };
 };
 
 MIN_EXTERNAL(mzed_chua);

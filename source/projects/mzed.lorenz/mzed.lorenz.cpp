@@ -85,14 +85,11 @@ public:
         this, "bang", "Calculate the next point.",
         MIN_FUNCTION
         {
-            double xNew;
-            double yNew;
-            double zNew;
-
+       
             // calculate the attractor
-            zNew = currentZ + (l_h * ((currentX * currentY) - ((8.0 / 3.0) * currentZ)));
-            yNew = currentY + (l_h * ((28.0 * currentX - currentY) - (currentX * currentZ)));
-            xNew = currentX + ((l_h * 10.0) * (currentY - currentX));
+            const double zNew { currentZ + (l_h * ((currentX * currentY) - ((8.0 / 3.0) * currentZ))) };
+            const double yNew { currentY + (l_h * ((28.0 * currentX - currentY) - (currentX * currentZ))) };
+            const double xNew { currentX + ((l_h * 10.0) * (currentY - currentX)) };
 
             // save the calculated values
             currentX = xNew;
@@ -120,9 +117,10 @@ public:
     };
 
 private:
-    double currentX = 0.6;
-    double currentY = 0.6;
-    double currentZ = 0.6;
+{
+    double currentX { 0.6 };
+    double currentY { 0.6 };
+    double currentZ { 0.6 };
 
 };
 
