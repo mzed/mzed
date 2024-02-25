@@ -10,10 +10,10 @@ using namespace c74::min;
 class mzed_chua : public object<mzed_chua>
 {
 public:
-    MIN_DESCRIPTION{ "Generate a Chua attractor." };
-    MIN_TAGS{ "chaos" };
-    MIN_AUTHOR{ "mzed" };
-    MIN_RELATED{ "roessler, lorenz" };
+    MIN_DESCRIPTION { "Generate a Chua attractor." };
+    MIN_TAGS        { "chaos" };
+    MIN_AUTHOR      { "mzed" };
+    MIN_RELATED     { "roessler, lorenz" };
 
     inlet<>  input{ this, "(bang) calculate next point on attractor" };
     outlet<> outlet_x{ this, "(float) x coordinate" };
@@ -109,7 +109,7 @@ public:
         this, "maxclass_setup",
         MIN_FUNCTION
         {
-            cout << "mzed.chua object by Michael F. Zbyszynski, v1.0 (c)2022" << endl;
+            cout << "mzed.chua object by Michael F. Zbyszyński, v3.0 ©2002-2024" << endl;
             return {};
         }
     };

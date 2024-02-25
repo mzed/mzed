@@ -206,7 +206,7 @@ public:
         };
 
         nbl_bin();
-        for (int i = 0; i < frameskip; ++i)
+        for (int i {}; i < frameskip; ++i)
         {
           update();
         }
@@ -482,11 +482,16 @@ private:
                   t,
                   color{ mosherColor },
                   position{ sx * mpX[mosher] - shim, sy * mpY[mosher] - shim },
+   
                   size{ ss * r[mosher], ss * r[mosher] }
                 };
             }
 
-            out2.send(int(mosher), int(type[mosher]), sx * mpX[mosher], sy * mpY[mosher], cr * 100);
+            out2.send(static_cast<int>(mosher), 
+                      static_cast<int>(type[mosher]), 
+                      sx * mpX[mosher], 
+                      sy * mpY[mosher], 
+                      cr * 100);
             out1.send(sx * mpX[mosher], sy * mpY[mosher], cr * 100);
         }
     }

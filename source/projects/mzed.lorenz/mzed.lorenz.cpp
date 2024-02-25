@@ -10,10 +10,10 @@ using namespace c74::min;
 class mzed_lorenz : public object<mzed_lorenz>
 {
 public:
-    MIN_DESCRIPTION{ "Generate a Lorenz attractor." };
-    MIN_TAGS{ "chaos" };
-    MIN_AUTHOR{ "mzed" };
-    MIN_RELATED{ "roessler, chua" };
+    MIN_DESCRIPTION { "Generate a Lorenz attractor." };
+    MIN_TAGS        { "chaos" };
+    MIN_AUTHOR      { "mzed" };
+    MIN_RELATED     { "roessler, chua" };
 
     inlet<>  inlet_x{ this, "(float or bang) bang calculates or x coordinate of previous point in attractor" };
     inlet<>  inlet_y{ this, "(float) y coordinate of previous point in attractor" };
@@ -110,7 +110,7 @@ public:
         this, "maxclass_setup",
         MIN_FUNCTION
         {
-            cout << "lorenz object by Michael F. Zbyszyński, v3.0 ©2002-2021" << endl;
+            cout << "lorenz object by Michael F. Zbyszyński, v3.0 ©2002-2024" << endl;
             return {};
         }
     };

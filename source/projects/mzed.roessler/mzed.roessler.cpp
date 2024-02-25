@@ -10,15 +10,15 @@ using namespace c74::min;
 class mzed_roessler : public object<mzed_roessler> 
 {
 public:
-  MIN_DESCRIPTION	{"Generate a roessler atttractor"};
-  MIN_TAGS		      {"chaos"};
-  MIN_AUTHOR	    	{"mzed"};
-  MIN_RELATED		  {"lorenz, chua"};
+  MIN_DESCRIPTION	{ "Generate a roessler atttractor" };
+  MIN_TAGS		    { "chaos" };
+  MIN_AUTHOR	    { "mzed" };
+  MIN_RELATED		{"lorenz, chua"};
   
-  inlet<>  input	  { this, "(bang) calculate next point on attractor" };
-  outlet<> outlet_x{ this, "(float) x coordinate" };
-  outlet<> outlet_y{ this, "(float) y coordinate" };
-  outlet<> outlet_z{ this, "(float) z coordinate" };
+  inlet<>  input	{ this, "(bang) calculate next point on attractor" };
+  outlet<> outlet_x { this, "(float) x coordinate" };
+  outlet<> outlet_y { this, "(float) y coordinate" };
+  outlet<> outlet_z { this, "(float) z coordinate" };
   
   attribute<double> r_a { this, "a", 0.02 };
   attribute<double> r_b { this, "b", 0.02 };
