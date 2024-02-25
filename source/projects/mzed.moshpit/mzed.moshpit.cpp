@@ -8,7 +8,6 @@
 using namespace c74::min;
 using namespace c74::min::ui;
 
-<<<<<<< HEAD
 constexpr size_t ARRAY_SIZE{ 1024 };
 constexpr size_t NMAX{ 50 };
 constexpr double RADIUS{ 1.0 };
@@ -17,16 +16,6 @@ constexpr size_t FR{ 2 };
 constexpr double VHAPPY{ 1.0 };
 constexpr double DAMP{ 1.0 };
 constexpr double GDT{ 0.1 };
-=======
-constexpr size_t ARRAY_SIZE { 1024 };
-constexpr int NMAX { 50 };
-constexpr double RADIUS { 1.0 };
-constexpr size_t TWO_R { 2 };
-constexpr size_t FR { 4 };
-constexpr double VHAPPY { 1.0 };
-constexpr double DAMP { 1.0 };
-constexpr double GDT { 0.1 };
->>>>>>> 81e976233ce50e6be1b1858fcb425b06d3ee09db
 
 class mzed_moshpit : public object<mzed_moshpit>, public ui_operator<200, 200>
 {
