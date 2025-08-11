@@ -9,6 +9,7 @@ externals
 extensions
 support
 build
+_build
 tests
 *.o
 *.dylib
